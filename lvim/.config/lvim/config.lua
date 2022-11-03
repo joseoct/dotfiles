@@ -50,8 +50,6 @@ lvim.builtin.which_key.mappings["<leader>"] = {
   ":w<cr>", "Save"
 }
 
--- leap
-
 -- indent-blank sera que abro uma issue?
 lvim.builtin.indentlines = {
   active = true,
