@@ -525,33 +525,24 @@ globalkeys = mytable.join(
   awful.key({ modkey }, "q", function() awful.spawn(browser) end,
     { description = "run browser", group = "launcher" }),
 
-  -- Default
-  --[[ Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
-    --]]
-  --[[ dmenu
-    awful.key({ modkey }, "x", function ()
-            os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-            beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-        end,
-        {description = "show dmenu", group = "launcher"}),
-    --]]
-  -- alternatively use rofi, a dmenu-like application with more features
-  -- check https://github.com/DaveDavenport/rofi for more details
+  -- Rofi apps
   awful.key({ altkey }, "p", function()
-    os.execute(string.format("rofi -show %s -theme %s",
-      'run', 'Arc-Dark'))
+    os.execute(string.format("~/.config/rofi/scripts/%s",
+      'launcher_t3'))
   end,
     { description = "show rofi", group = "launcher" }),
-  awful.key({ altkey, "Shift" }, "p", function()
-    os.execute(string.format("rofi -show %s -theme %s",
-      'filebrowser', 'sidebar'))
+
+  -- Rofi powermenu
+  awful.key({ altkey }, "=", function()
+    os.execute(string.format("~/.config/rofi/scripts/%s",
+      'powermenu_t2'))
   end,
     { description = "show rofi", group = "launcher" }),
+
   -- Prompt
   awful.key({ altkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
     { description = "run google chrome", group = "applications" }),
+
   awful.key({ altkey }, "e", function() awful.util.spawn("thunar") end,
     { description = "run thunar", group = "applications" }),
 
