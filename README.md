@@ -14,3 +14,13 @@ rootfiles folder contains configuration for
    2. tmux
    3. imwheel
    4. easystroke
+
+*pacman packages*
+```
+  sudo pacman -S awesome alacritty discord tmux npm lazygit
+```
+
+*aur*
+```
+  yay easystroke
+```
