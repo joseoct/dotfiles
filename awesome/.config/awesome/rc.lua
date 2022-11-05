@@ -107,7 +107,7 @@ local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "librewolf"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "1", "2", "3", "4", "5" }
+awful.util.tagnames = {}
 awful.layout.layouts = {
   -- awful.layout.suit.floating,
   awful.layout.suit.tile,
@@ -247,8 +247,25 @@ screen.connect_signal("arrange", function(s)
   end
 end)
 
+local lo = awful.layout.layouts
+local my_tags = {
+  tags = {
+    { names = { "dev", "web", "chat", "mail", "others" },
+      layout = { lo[1], lo[1], lo[1], lo[1], lo[1] },
+    },
+    { names = { "1", "2", "3", "4", "5" },
+      layout = { lo[1], lo[1], lo[1], lo[1], lo[1] },
+    },
+  }
+}
+
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
+awful.screen.connect_for_each_screen(function(s)
+  beautiful.at_screen_connect(s)
+  screen_index = s.index
+  awful.tag(my_tags.tags[screen_index].names, s, my_tags.tags[screen_index].layout)
+
+end)
 
 -- }}}
 
