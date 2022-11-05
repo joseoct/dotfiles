@@ -845,8 +845,8 @@ beautiful.notification_border_color = '#F38BA8'
 naughty.config.icon_dirs = { "/usr/share/pixmaps", "/usr/share/icons/Papirus-Dark/48x48/status/",
   "/usr/share/icons/Papirus-Dark/48x48/devices/" }
 naughty.config.icon_formats = { "png", "gif", "svg" }
-
-awful.spawn.with_shell("xrandr --output eDP-1-1 --pos 0x360 --mode 1280x720 --rate 60.02 --output DP-0 --pos 1280x0 --primary --mode 1920x1080 --rate 144.00 --right-of eDP-1-1")
+awful.spawn.with_shell("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMI-1-1 --off --output HDMI-1-2 --off")
+-- awful.spawn.with_shell("xrandr --output eDP-1-1 --pos 0x360 --mode 1280x720 --rate 60.02 --output DP-0 --pos 1280x0 --primary --mode 1920x1080 --rate 144.00 --right-of eDP-1-1")
 awful.spawn.with_shell("easystroke")
 -- awful.spawn.with_shell("picom")
 awful.spawn.with_shell("flameshot")
