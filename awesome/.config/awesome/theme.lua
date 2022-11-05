@@ -11,12 +11,13 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
 
-local spotify_widget    = require("awesome-wm-widgets.spotify-widget.spotify")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local volume_widget     = require("awesome-wm-widgets.volume-widget.volume")
-local calendar_widget   = require("awesome-wm-widgets.calendar-widget.calendar")
-local fs_widget         = require("awesome-wm-widgets.fs-widget.fs-widget")
-local todo_widget       = require("awesome-wm-widgets.todo-widget.todo")
+local spotify_widget     = require("awesome-wm-widgets.spotify-widget.spotify")
+local brightness_widget  = require("awesome-wm-widgets.brightness-widget.brightness")
+local volume_widget      = require("awesome-wm-widgets.volume-widget.volume")
+local calendar_widget    = require("awesome-wm-widgets.calendar-widget.calendar")
+local fs_widget          = require("awesome-wm-widgets.fs-widget.fs-widget")
+local todo_widget        = require("awesome-wm-widgets.todo-widget.todo")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -369,6 +370,11 @@ function theme.at_screen_connect(s)
         bg_color = '#1e252c',
         mute_color = '#e54c62',
         size = 20,
+      },
+      wibox.widget.textbox("  "),
+      logout_menu_widget {
+        font = 'Roboto medium 10',
+        onlock = function() awful.spawn.with_shell('~/.config/i3/scripts/blur-lock') end
       },
       wibox.widget.textbox("  "),
     },
