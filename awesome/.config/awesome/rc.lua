@@ -107,7 +107,7 @@ local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "librewolf"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "1", "2", "3", "4", "5" }
+awful.util.tagnames = { "dev", "web", "chat", "mail", "other" }
 awful.layout.layouts = {
   -- awful.layout.suit.floating,
   awful.layout.suit.tile,
@@ -619,6 +619,7 @@ clientkeys = mytable.join(
     function(c)
       c.maximized = not c.maximized
       c:raise()
+      naughty.notify({ text = "maximized: " .. c.class })
     end,
     { description = "(un)maximize", group = "client" }),
   awful.key({ modkey, "Control" }, "a",
@@ -721,6 +722,32 @@ awful.rules.rules = {
       placement = awful.placement.no_overlap + awful.placement.no_offscreen,
       size_hints_honor = false
     }
+  },
+
+  -- My rules
+  {
+    rule = { class = "Alacritty" },
+    properties = { tag = "dev", switchtotag = true }
+  },
+  {
+    rule = { class = "Google-chrome" },
+    properties = { tag = "web", switchtotag = true }
+  },
+  {
+    rule = { class = "firefox" },
+    properties = { tag = "web" }
+  },
+  {
+    rule = { class = "discord" },
+    properties = { tag = "chat", switchtotag = true }
+  },
+  {
+    rule = { class = "Spotify" },
+    properties = { tag = "other", screen = 2 }
+  },
+  {
+    rule = { class = "Mailspring" },
+    properties = { tag = "mail", screen = 1 }
   },
 
   -- Floating clients.
