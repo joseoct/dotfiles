@@ -316,8 +316,6 @@ function theme.at_screen_connect(s)
       mpdicon,
       theme.mpd.widget,
       wibox.widget.textbox("     "),
-      wibox.widget.systray(),
-      wibox.widget.textbox("     "),
       spotify_widget({
         play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
         pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg',
