@@ -539,12 +539,17 @@ globalkeys = mytable.join(
   end,
     { description = "show rofi", group = "launcher" }),
 
-  -- Prompt
+  -- Google chrome
   awful.key({ altkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
     { description = "run google chrome", group = "applications" }),
 
+  -- Thunar
   awful.key({ altkey }, "e", function() awful.util.spawn("thunar") end,
     { description = "run thunar", group = "applications" }),
+
+  -- Flameshot
+  awful.key({ modkey, "Shift" }, "s", function() awful.util.spawn("flameshot gui") end,
+    { description = "run flameshot", group = "applications" }),
 
   awful.key({ modkey }, "x",
     function()
@@ -619,7 +624,6 @@ clientkeys = mytable.join(
     function(c)
       c.maximized = not c.maximized
       c:raise()
-      naughty.notify({ text = "maximized: " .. c.class })
     end,
     { description = "(un)maximize", group = "client" }),
   awful.key({ modkey, "Control" }, "a",

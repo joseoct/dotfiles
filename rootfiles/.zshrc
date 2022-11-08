@@ -13,6 +13,7 @@ alias tn="tmux new -s"
 alias td="tmux detach-client"
 alias tls="tmux ls"
 alias dotfiles="lvim ~/dotfiles/"
+alias pac="sudo pacman -S"
 
 export PATH=/home/joseoctavio/.local/bin:$PATH
 export BROWSER='google-chrome-stable'
