@@ -6,6 +6,7 @@ reload "user.leap"
 reload "user.lualine"
 reload "user.treesitter"
 reload "user.copilot"
+reload "user.autocommands"
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
