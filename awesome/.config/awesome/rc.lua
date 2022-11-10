@@ -271,8 +271,8 @@ globalkeys = mytable.join(
     { description = "decrease brightness", group = "custom" }),
   -- Destroy all notifications
   -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-  awful.key({ altkey }, "p", function() os.execute("screenshot") end,
-    { description = "take a screenshot", group = "hotkeys" }),
+  -- awful.key({ altkey }, "p", function() os.execute("screenshot") end,
+  --   { description = "take a screenshot", group = "hotkeys" }),
 
   -- Show help
   awful.key({ modkey, }, "s", hotkeys_popup.show_help,
@@ -404,8 +404,8 @@ globalkeys = mytable.join(
     { description = "increase the number of columns", group = "layout" }),
   awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol(-1, nil, true) end,
     { description = "decrease the number of columns", group = "layout" }),
-  awful.key({ modkey, }, "space", function() awful.layout.inc(1) end,
-    { description = "select next", group = "layout" }),
+  -- awful.key({ modkey, }, "space", function() awful.layout.inc(1) end,
+  --   { description = "select next", group = "layout" }),
   awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(-1) end,
     { description = "select previous", group = "layout" }),
 
@@ -526,11 +526,11 @@ globalkeys = mytable.join(
     { description = "run browser", group = "launcher" }),
 
   -- Rofi apps
-  awful.key({ altkey }, "p", function()
-    os.execute(string.format("~/.config/rofi/scripts/%s",
-      'launcher_t3'))
-  end,
-    { description = "show rofi", group = "launcher" }),
+  -- awful.key({ altkey }, "p", function()
+  --   os.execute(string.format("~/.config/rofi/scripts/%s",
+  --     'launcher_t3'))
+  -- end,
+  --   { description = "show rofi", group = "launcher" }),
 
   -- Rofi powermenu
   awful.key({ altkey }, "=", function()
@@ -624,6 +624,7 @@ clientkeys = mytable.join(
     function(c)
       c.maximized = not c.maximized
       c:raise()
+      naughty.notify({ text = "Client maximized: " .. tostring(c.name) })
     end,
     { description = "(un)maximize", group = "client" }),
   awful.key({ modkey, "Control" }, "a",
@@ -878,15 +879,14 @@ naughty.config.icon_dirs = { "/usr/share/pixmaps", "/usr/share/icons/Papirus-Dar
 naughty.config.icon_formats = { "png", "gif", "svg" }
 awful.spawn.with_shell("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMI-1-1 --off --output HDMI-1-2 --off")
 -- awful.spawn.with_shell("xrandr --output eDP-1-1 --pos 0x360 --mode 1280x720 --rate 60.02 --output DP-0 --pos 1280x0 --primary --mode 1920x1080 --rate 144.00 --right-of eDP-1-1")
-awful.spawn.with_shell("easystroke")
+awful.spawn("easystroke")
 -- awful.spawn.with_shell("picom")
-awful.spawn.with_shell("flameshot")
+awful.spawn("flameshot")
 -- awful.spawn.with_shell("blueman-applet")
 -- awful.spawn.with_shell("sudo ethtool --change enp3s0f1 wol g")
-awful.spawn.with_shell("imwheel -b '45'")
-awful.spawn.with_shell("optimus-manager-qt")
-awful.spawn.with_shell("xset r rate 180 38")
-awful.spawn.with_shell("sleep 1s && nitrogen --restore")
-awful.spawn.with_shell("mailspring", { screen = 1, tag = "5" })
--- awful.spawn.once("spotify", { screen = 1, tag = "5" })
--- awful.spawn.with_shell("sleep 1s && wmctrl -c :easystroke:")
+awful.spawn("imwheel -b '45'")
+awful.spawn("optimus-manager-qt")
+awful.spawn("xset r rate 180 38")
+awful.spawn("sleep 1s && nitrogen --restore")
+awful.spawn("mailspring")
+awful.spawn("picom")
