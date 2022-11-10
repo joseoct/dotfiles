@@ -624,7 +624,6 @@ clientkeys = mytable.join(
     function(c)
       c.maximized = not c.maximized
       c:raise()
-      naughty.notify({ text = "Client maximized: " .. tostring(c.name) })
     end,
     { description = "(un)maximize", group = "client" }),
   awful.key({ modkey, "Control" }, "a",
