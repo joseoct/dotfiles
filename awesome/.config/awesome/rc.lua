@@ -525,6 +525,11 @@ globalkeys = mytable.join(
   awful.key({ modkey }, "q", function() awful.spawn(browser) end,
     { description = "run browser", group = "launcher" }),
 
+  awful.key({ altkey }, "p", function()
+    os.execute(string.format("rofi -show %s -theme %s",
+      'run', 'dmenu'))
+  end,
+    { description = "show rofi", group = "launcher" }),
   -- Rofi apps
   -- awful.key({ altkey }, "p", function()
   --   os.execute(string.format("~/.config/rofi/scripts/%s",
@@ -877,7 +882,9 @@ beautiful.notification_bg = '#1E1E2E'
 naughty.config.icon_dirs = { "/usr/share/pixmaps", "/usr/share/icons/Papirus-Dark/48x48/status/",
   "/usr/share/icons/Papirus-Dark/48x48/devices/" }
 naughty.config.icon_formats = { "png", "gif", "svg" }
+
 awful.spawn.with_shell("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMI-1-1 --off --output HDMI-1-2 --off")
+awful.spawn.with_shell("sleep 1s && nitrogen --restore")
 -- awful.spawn.with_shell("xrandr --output eDP-1-1 --pos 0x360 --mode 1280x720 --rate 60.02 --output DP-0 --pos 1280x0 --primary --mode 1920x1080 --rate 144.00 --right-of eDP-1-1")
 awful.spawn("easystroke")
 awful.spawn("flameshot")
@@ -886,6 +893,5 @@ awful.spawn("flameshot")
 awful.spawn("imwheel -b '45'")
 awful.spawn("optimus-manager-qt")
 awful.spawn("xset r rate 180 38")
-awful.spawn("sleep 1s && nitrogen --restore")
 awful.spawn("mailspring")
 awful.spawn("picom")

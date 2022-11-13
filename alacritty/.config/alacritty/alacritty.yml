@@ -8,9 +8,13 @@ env:
 
 font:
   normal:
-    family: Caskaydia Cove Nerd Font
+    family: JetBrainsMono Nerd Font
 
   size: 12.9
+
+window:
+  background_opacity: 0.5
+  opacity: 0.2
 
 colors:
   # Default colors
