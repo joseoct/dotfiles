@@ -95,5 +95,6 @@ lvim.plugins = {
   { "getomni/neovim" },
   { "morhetz/gruvbox" },
   { "joshdick/onedark.vim" },
-  { "sainnhe/sonokai" }
+  { "sainnhe/sonokai" },
+  { "Mofiqul/dracula.nvim" }
 }

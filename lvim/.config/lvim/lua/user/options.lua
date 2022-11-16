@@ -1,5 +1,4 @@
-lvim.colorscheme = "sonokai"
--- vim.g.gruvbox_invert_selection = 0
+vim.g.gruvbox_invert_selection = 0
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.builtin.alpha.active = true

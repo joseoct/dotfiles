@@ -16,7 +16,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.rainbow = {
   enable = true,
-  extended_mode = true,
+  extended_mode = false,
   colors = {
     "#ae81ff",
     "#ffd866",

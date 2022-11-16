@@ -8,6 +8,8 @@ reload "user.treesitter"
 reload "user.copilot"
 reload "user.autocommands"
 
+lvim.colorscheme = "gruvbox"
+
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   -- {

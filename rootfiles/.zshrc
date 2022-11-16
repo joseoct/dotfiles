@@ -8,6 +8,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
 alias ta="tmux attach -t"
 alias tn="tmux new -s"
 alias td="tmux detach-client"
@@ -62,3 +64,5 @@ zinit light-mode for \
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
+
+eval "$(starship init zsh)"
