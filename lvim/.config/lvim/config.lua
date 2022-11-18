@@ -8,7 +8,18 @@ reload "user.treesitter"
 reload "user.copilot"
 reload "user.autocommands"
 
-lvim.colorscheme = "gruvbox"
+lvim.colorscheme = "sonokai"
+lvim.builtin.gitsigns.opts.signs = {
+  add = {
+    text = "⊕"
+  },
+  change = {
+    text = "⊘"
+  },
+  delete = {
+    text = "⊖"
+  }
+}
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {

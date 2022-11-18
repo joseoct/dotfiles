@@ -739,6 +739,10 @@ awful.rules.rules = {
     properties = { tag = "dev", switchtotag = true }
   },
   {
+    rule = { class = "Code" },
+    properties = { tag = "dev", switchtotag = true }
+  },
+  {
     rule = { class = "Google-chrome" },
     properties = { tag = "web", switchtotag = true }
   },
@@ -810,6 +814,7 @@ client.connect_signal("manage", function(c)
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
   -- if not awesome.startup then awful.client.setslave(c) end
+  c.shape = gears.shape.rounded_rect
 
   if awesome.startup
       and not c.size_hints.user_position
@@ -892,4 +897,3 @@ awful.spawn.with_shell("easystroke")
 awful.spawn.once("flameshot")
 awful.spawn.once("optimus-manager-qt")
 awful.spawn.once("mailspring")
-awful.spawn.once("picom")

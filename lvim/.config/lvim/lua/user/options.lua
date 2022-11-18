@@ -23,7 +23,7 @@ lvim.builtin.cmp.window.completion = {
   border = "rounded",
   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
 }
-lvim.transparent_window = true
+lvim.transparent_window = false
 -- lvim.builtin.cmp.formatting.source_names = {
 --   nvim_lsp = "",
 --   emoji = "",

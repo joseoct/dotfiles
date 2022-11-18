@@ -66,3 +66,5 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
 eval "$(starship init zsh)"
+
+colorscript random
