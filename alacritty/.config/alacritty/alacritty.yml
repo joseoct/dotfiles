@@ -1,14 +1,13 @@
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: Recursive
     style: Bold
+  italic:
+    family: Recursive
+    style: Italic
 
-  size: 11
 
 draw_bold_text_with_bright_colors: true
-
-window:
-  dynamic_padding: true
 
 colors:
     primary:

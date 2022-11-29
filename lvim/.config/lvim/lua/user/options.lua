@@ -32,7 +32,6 @@ lvim.builtin.which_key.setup.plugins.presets = {
 
 vim.opt.fillchars = {
   fold = " ", -- remove folding chars
-  vert = "\\", -- set vsplit chars
 }
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldtext = "getline(v:foldstart).'...'.trim(getline(v:foldend))"
@@ -109,9 +108,6 @@ local options = {
 }
 
 
--- extend some types
-require('luasnip').filetype_extend("javascriptreact", { "html" })
-require('luasnip').filetype_extend("typescriptreact", { "html" })
 
 vim.g.gruvbox_invert_selection = 0
 vim.g.loaded_netrw = 1

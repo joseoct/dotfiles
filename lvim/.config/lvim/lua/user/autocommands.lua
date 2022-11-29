@@ -8,5 +8,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     vim.cmd "hi NvimTreeOpenedFolderName guifg=#b39df3"
     vim.cmd "hi IndentBlanklineContextChar guifg=#b39df3"
     vim.cmd "hi @tag.delimiter guifg=#a9a9a9"
+    vim.cmd "hi Keyword gui=italic"
+    vim.cmd "hi @keyword.return gui=italic"
+    vim.cmd "hi @tag.attribute.tsx gui=italic"
   end,
 })

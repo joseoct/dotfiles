@@ -1,4 +1,5 @@
 lvim.plugins = {
+  { 'shaunsingh/oxocarbon.nvim', run = './install.sh' },
   {
     "jose-elias-alvarez/typescript.nvim",
     config = function()
