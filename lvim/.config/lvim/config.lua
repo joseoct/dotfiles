@@ -7,19 +7,8 @@ reload "user.lualine"
 reload "user.treesitter"
 reload "user.copilot"
 reload "user.autocommands"
-
-lvim.colorscheme = "sonokai"
-lvim.builtin.gitsigns.opts.signs = {
-  add = {
-    text = "⊕"
-  },
-  change = {
-    text = "⊘"
-  },
-  delete = {
-    text = "⊖"
-  }
-}
+reload "user.gitsigns"
+reload "user.cmd"
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {

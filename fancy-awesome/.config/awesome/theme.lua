@@ -25,9 +25,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/"
 theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "Roboto Medium 10"
+theme.font                                      = "JetBrainsMono Medium 10"
+theme.taglist_font                              = "JetBrainsMono Medium 10"
 theme.menu_bg_normal                            = "#000000"
-theme.menu_bg_focus                             = "#000000"
 -- bg = {
 --   type = "linear",
 --   from = { 0, 0, 0 },
@@ -36,12 +36,12 @@ theme.menu_bg_focus                             = "#000000"
 -- },
 theme.bg_normal                                 = "#00000000"
 theme.bg_focus                                  = "#00000000"
-theme.bg_urgent                                 = "#000000"
+theme.bg_urgent                                 = "#00000000"
 theme.bg_systray                                = "#001818AA"
-theme.fg_normal                                 = "#aaaaaa"
-theme.fg_focus                                  = "#8BD5CA"
-theme.fg_urgent                                 = "#af1d18"
-theme.fg_minimize                               = "#ffffff"
+theme.fg_normal                                 = "#ffffff"
+theme.fg_focus                                  = "#cba5f7"
+theme.fg_urgent                                 = "#ed8796"
+theme.fg_minimize                               = "#aaaaaa"
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#1c2022"
 theme.border_focus                              = "#cba5f7"
@@ -114,7 +114,7 @@ local clockicon = wibox.widget.imagebox(theme.widget_clock)
 
 local mytextclock = wibox.widget.textclock(markup("#94E2D5", "%A %d/%m/%y ") ..
   markup("#b8c0e0", "•") .. markup("#f9e2af", " %H:%M "))
-mytextclock.font = "Roboto medium 10"
+mytextclock.font = "JetBrainsMono medium 10"
 
 local cw = calendar_widget({
   theme = 'outrun',
@@ -316,7 +316,6 @@ function theme.at_screen_connect(s)
       mpdicon,
       theme.mpd.widget,
       wibox.widget.textbox("     "),
-      wibox.widget.systray(),
       wibox.widget.textbox("     "),
       spotify_widget({
         play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
@@ -356,6 +355,7 @@ function theme.at_screen_connect(s)
       bat.widget,
       todo_widget(),
       fs_widget({ mounts = { '/' } }),
+      wibox.widget.textbox(" "),
       brightness_widget {
         type = 'arc',
         program = 'light',

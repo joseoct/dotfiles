@@ -1,3 +1,4 @@
+lvim.colorscheme = "catppuccin"
 vim.g.gruvbox_invert_selection = 0
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -23,7 +24,21 @@ lvim.builtin.cmp.window.completion = {
   border = "rounded",
   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
 }
-lvim.transparent_window = false
+
+lvim.builtin.which_key.setup.plugins.presets = {
+  g = true,
+  z = true
+}
+
+vim.opt.fillchars = {
+  fold = " ", -- remove folding chars
+  vert = "\\", -- set vsplit chars
+}
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldtext = "getline(v:foldstart).'...'.trim(getline(v:foldend))"
+vim.opt.foldnestmax = "3"
+vim.opt.foldminlines = "1"
+
 -- lvim.builtin.cmp.formatting.source_names = {
 --   nvim_lsp = "",
 --   emoji = "",
@@ -43,6 +58,14 @@ lvim.transparent_window = false
 -- vim.opt.showtabline = 0
 
 local options = {
+  foldexpr = "nvim_treesitter#foldexpr()",
+  foldtext = "getline(v:foldstart).'...'.trim(getline(v:foldend))",
+  foldnestmax = "3",
+  foldminlines = "1",
+  fillchars = {
+    fold = " ", -- remove folding chars
+    vert = "\\", -- set vsplit chars
+  },
   -- backup = false, -- creates a backup file
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
   -- cmdheight = 0, -- more space in the neovim command line for displaying messages
@@ -84,6 +107,7 @@ local options = {
   -- colorcolumn = "80",
   -- colorcolumn = "120",
 }
+
 
 -- extend some types
 require('luasnip').filetype_extend("javascriptreact", { "html" })

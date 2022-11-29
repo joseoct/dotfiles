@@ -6,6 +6,8 @@ lvim.builtin.which_key.mappings["a"] = {
   [","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Go to next mark" },
 }
 
+lvim.builtin.which_key.mappings.l.a = { '<cmd>CodeActionMenu<cr>', "Code Action ui" }
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -22,6 +24,10 @@ lvim.builtin.which_key.mappings["w"] = {
   ["l"] = { "<C-w>v", "VSplit" },
 }
 
+lvim.builtin.which_key.mappings["v"] = {
+  "$va{V", "Select All Function"
+}
+
 lvim.builtin.which_key.mappings["<leader>"] = {
   ":w<cr>", "Save"
 }
@@ -31,4 +37,9 @@ lvim.builtin.which_key.mappings["S"] = {
   c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
   l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
   Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+}
+
+-- Visual whichkey
+lvim.builtin.which_key.vmappings["y"] = {
+  '"+y', "Copy to clipboard"
 }

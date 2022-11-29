@@ -1,5 +1,16 @@
 lvim.plugins = {
   {
+    "jose-elias-alvarez/typescript.nvim",
+    config = function()
+      require("typescript").setup({})
+    end,
+  },
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  },
+  { "nvim-treesitter/playground" },
+  {
     "romgrk/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup {
@@ -92,9 +103,6 @@ lvim.plugins = {
       })
     end,
   },
-  { "getomni/neovim" },
-  { "morhetz/gruvbox" },
-  { "joshdick/onedark.vim" },
   { "sainnhe/sonokai" },
-  { "Mofiqul/dracula.nvim" }
+  { "catppuccin/nvim", as = "catppuccin" },
 }

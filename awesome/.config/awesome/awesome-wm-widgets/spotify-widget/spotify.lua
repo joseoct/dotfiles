@@ -30,7 +30,7 @@ local function worker(user_args)
 
   local play_icon = args.play_icon or '/usr/share/icons/Arc/actions/24/player_play.png'
   local pause_icon = args.pause_icon or '/usr/share/icons/Arc/actions/24/player_pause.png'
-  local font = 'Roboto Medium 10'
+  local font = 'Play 9'
   local dim_when_paused = args.dim_when_paused == nil and false or args.dim_when_paused
   local dim_opacity = args.dim_opacity or 0.2
   local max_length = args.max_length or 15
@@ -48,7 +48,7 @@ local function worker(user_args)
   spotify_widget = wibox.widget {
     {
       id = 'artistw',
-      font = 'Roboto Bold 10',
+      font = 'Play Bold 9',
       widget = wibox.widget.textbox,
     },
     {
@@ -71,7 +71,7 @@ local function worker(user_args)
       -- speed = 40,
       {
         id = 'titlew',
-        font = 'Roboto Regular 10',
+        font = font,
         widget = wibox.widget.textbox
       }
     },
