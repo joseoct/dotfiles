@@ -12,7 +12,7 @@ alias ta="tmux attach -t"
 alias tn="tmux new -s"
 alias td="tmux detach-client"
 alias tls="tmux ls"
-alias dotfiles="lvim ~/dotfiles/"
+alias dot="lvim ~/dotfiles/"
 alias pac="sudo pacman -S"
 alias pacr="sudo pacman -R"
 

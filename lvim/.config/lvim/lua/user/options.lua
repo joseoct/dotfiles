@@ -1,4 +1,5 @@
 lvim.colorscheme = "catppuccin"
+vim.g.molokai_original = 1
 vim.g.gruvbox_invert_selection = 0
 lvim.log.level = "warn"
 lvim.format_on_save = true
