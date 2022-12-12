@@ -14,6 +14,15 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- My Widgets
+local fs_widget          = require("awesome-wm-widgets.fs-widget.fs-widget")
+local spotify_widget     = require("awesome-wm-widgets.spotify-widget.spotify")
+local volume_widget      = require("awesome-wm-widgets.volume-widget.volume")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local brightness_widget  = require("awesome-wm-widgets.brightness-widget.brightness")
+local batteryarc_widget  = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -50,7 +59,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = "lvim"
+editor = os.getenv("EDITOR") or "lvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -62,6 +71,7 @@ modkey = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+  -- awful.layout.suit.floating,
   awful.layout.suit.tile,
   -- awful.layout.suit.tile.left,
   -- awful.layout.suit.tile.bottom,
@@ -76,27 +86,9 @@ awful.layout.layouts = {
   -- awful.layout.suit.corner.nw,
   -- awful.layout.suit.corner.ne,
   -- awful.layout.suit.corner.sw,
-  -- awful.layout.suit.corner.se,}
+  -- awful.layout.suit.corner.se,
 }
 -- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", terminal .. " -e man awesome" },
-  { "edit config", editor_cmd .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-  { "open terminal", terminal }
-}
-})
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-  menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -107,7 +99,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%A %d/%m/%y, %H:%M")
+mytextclock = wibox.widget.textclock('%d/%m/%y • %H:%M')
+mytextclock.font = "JetBrainsMono medium 9"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -157,19 +150,32 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/mandala2.jpg", s, true)
+    gears.wallpaper.maximized(wallpaper, s, true)
   end
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- No borders when client is maximized
+screen.connect_signal("arrange", function(s)
+  local only_one = #s.tiled_clients == 1
+  for _, c in pairs(s.clients) do
+    if c.maximized or c.fullscreen then
+      c.border_width = 0
+    else
+      c.border_width = beautiful.border_width
+    end
+  end
+end)
+
+
 awful.screen.connect_for_each_screen(function(s)
   -- Wallpaper
   set_wallpaper(s)
 
   -- Each screen has its own tag table.
-  awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+  awful.tag({ "dev", "web", "chat", "mail", "ttv", "games" }, s, awful.layout.layouts[1])
 
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
@@ -187,17 +193,61 @@ awful.screen.connect_for_each_screen(function(s)
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
   }
+  beautiful.taglist_font = "JetBrainsMono medium 9"
+
+  beautiful.systray_icon_spacing = 2
+
+  local my_round_systray = wibox.widget {
+    {
+      wibox.widget.systray(),
+      top    = 3,
+      bottom = 3,
+      widget = wibox.container.margin,
+    },
+    widget = wibox.container.background,
+  }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist {
-    screen  = s,
-    filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons
+    screen          = s,
+    filter          = awful.widget.tasklist.filter.currenttags,
+    buttons         = tasklist_buttons,
+    style           = {
+      shape = gears.shape.rounded_bar,
+    },
+    layout          = {
+      spacing = 10,
+      layout  = wibox.layout.flex.horizontal
+    },
+    -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+    -- not a widget instance.
+    widget_template = {
+      {
+        {
+          {
+            {
+              id     = 'icon_role',
+              widget = wibox.widget.imagebox,
+            },
+            margins = 2,
+            widget  = wibox.container.margin,
+          },
+          {
+            id     = 'text_role',
+            widget = wibox.widget.textbox,
+          },
+          layout = wibox.layout.fixed.horizontal,
+        },
+        left   = 10,
+        right  = 10,
+        widget = wibox.container.margin
+      },
+      id     = 'background_role',
+      widget = wibox.container.background,
+    },
   }
-
+  -- Create the wibox
   s.mywibox = awful.wibar({ position = "bottom", screen = s })
-
-  local separator = wibox.widget.textbox("  ")
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -206,29 +256,64 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       s.mytaglist,
-      s.mypromptbox,
+      wibox.widget.textbox("     "),
+      spotify_widget({
+        play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
+        pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg',
+        dim_when_paused = true,
+        dim_opacity = 0.5,
+        max_length = -1,
+        show_tooltip = false,
+      }),
+
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      wibox.widget.systray(),
-      separator,
+      my_round_systray,
+      wibox.widget.textbox("   "),
       mytextclock,
-      separator,
+      wibox.widget.textbox("   "),
+      fs_widget({ mounts = { '/' } }),
+      wibox.widget.textbox("   "),
+      batteryarc_widget({
+        show_current_level = false,
+        arc_thickness = 2,
+      }),
+      wibox.widget.textbox("  "),
+      brightness_widget {
+        type = 'arc',
+        program = 'light',
+        step = 5,
+        timeout = 1,
+      },
+      wibox.widget.textbox("  "),
+      volume_widget {
+        mixer_cmd = 'pavucontrol',
+        widget_type = 'arc',
+        main_color = '#8BD5CA',
+        bg_color = '#1e252c',
+        mute_color = '#e54c62',
+        size = 20,
+      },
+      wibox.widget.textbox("  "),
+      logout_menu_widget {
+        font = 'JetBrainsMono medium 9',
+        onlock = function() awful.spawn.with_shell('~/.config/i3/scripts/blur-lock') end
+      },
     },
   }
 end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
--- awful.button({}, 3, function() mymainmenu:toggle() end),
--- awful.button({}, 4, awful.tag.viewnext),
--- awful.button({}, 5, awful.tag.viewprev)
-))
+-- root.buttons(gears.table.join(
+--   awful.button({}, 3, function() mymainmenu:toggle() end),
+--   awful.button({}, 4, awful.tag.viewnext),
+--   awful.button({}, 5, awful.tag.viewprev)
+-- ))
 -- }}}
 
--- Key bindings
 root.keys(bindings.globalkeys)
 
 -- {{{ Rules
@@ -236,7 +321,7 @@ root.keys(bindings.globalkeys)
 awful.rules.rules = {
   -- All clients will match this rule.
   { rule = {},
-    properties = { border_width = beautiful.border_width,
+    properties = { border_width = 1,
       border_color = beautiful.border_normal,
       focus = awful.client.focus.filter,
       raise = true,
@@ -267,8 +352,6 @@ awful.rules.rules = {
       "xtightvncviewer"
     },
 
-
-
     -- Note that the name property shown in xprop might be set slightly after creation of the client
     -- and the name shown there might not match defined rules here.
     name = {
@@ -286,44 +369,43 @@ awful.rules.rules = {
   }, properties = { titlebars_enabled = true }
   },
 
-  -- {{{ My rules
+  -- My rules
+  {
+    rule = { class = "mpv" },
+    properties = { tag = "ttv", switchtotag = false }
+  },
   {
     rule = { class = "Alacritty" },
-    properties = { tag = "1", switchtotag = true }
+    properties = { tag = "dev", switchtotag = true }
   },
   {
     rule = { class = "Code" },
-    properties = { tag = "1", switchtotag = true }
+    properties = { tag = "dev", switchtotag = true }
   },
   {
     rule = { class = "Google-chrome" },
-    properties = { tag = "2", switchtotag = true }
+    properties = { tag = "web", switchtotag = true }
   },
   {
     rule = { class = "firefox" },
-    properties = { tag = "2", switchtotag = true }
+    properties = { tag = "web" }
   },
   {
     rule = { class = "discord" },
-    properties = { tag = "3", switchtotag = true }
+    properties = { tag = "chat", switchtotag = true }
   },
   {
     rule = { class = "Mailspring" },
-    properties = { tag = "4", screen = 1 }
-  },
-  {
-    rule = { class = "mpv" },
-    properties = { tag = "5", switchtotag = false }
+    properties = { tag = "mail", screen = 1 }
   },
   {
     rule = { class = "streamlink-twitch-gui" },
-    properties = { tag = "5", screen = 1 }
+    properties = { tag = "ttv", screen = 1 }
   },
   {
     rule = { class = "chatterino" },
-    properties = { tag = "5", screen = 1 }
+    properties = { tag = "ttv", screen = 1 }
   },
-  -- }}}
 
 
   -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -360,31 +442,6 @@ client.connect_signal("request::titlebars", function(c)
       awful.mouse.client.resize(c)
     end)
   )
-
-  awful.titlebar(c):setup {
-    { -- Left
-      awful.titlebar.widget.iconwidget(c),
-      buttons = buttons,
-      layout  = wibox.layout.fixed.horizontal
-    },
-    { -- Middle
-      { -- Title
-        align  = "center",
-        widget = awful.titlebar.widget.titlewidget(c)
-      },
-      buttons = buttons,
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton(c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton(c),
-      awful.titlebar.widget.ontopbutton(c),
-      awful.titlebar.widget.closebutton(c),
-      layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-  }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -392,14 +449,21 @@ client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c) c.border_color = "#cba5f7" end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+--beautiful.useless_gap = 3
 beautiful.notification_icon_size = 120
 beautiful.notification_border_width = 1
 beautiful.notification_border_color = '#F38BA8'
 beautiful.notification_bg = '#1E1E2E'
+beautiful.bg_minimize = '#00000000'
+beautiful.bg_urgent = '#F38BA8'
+beautiful.fg_urgent = '#000000'
+beautiful.bg_normal = '#362b42'
+beautiful.bg_focus = '#cba5f7'
+beautiful.fg_focus = '#000000'
 
 local function run_once(command)
   local args_start = string.find(command, " ")
@@ -424,14 +488,14 @@ local function run_once(command)
     end)
 end
 
-run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
--- run_once("sleep 1s && nitrogen --restore")
+run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMI-1-1 --off --output HDMI-1-2 --off")
+run_once("sleep 1s && nitrogen --restore")
 run_once("picom")
 run_once("imwheel -b '45'")
 run_once("xset r rate 180 38")
 
--- run_once("easystroke")
--- run_once("flameshot")
--- run_once("optimus-manager-qt")
--- run_once("mailspring")
--- run_once("streamlink-twitch-gui")
+run_once("easystroke")
+run_once("flameshot")
+run_once("optimus-manager-qt")
+run_once("mailspring")
+run_once("streamlink-twitch-gui")

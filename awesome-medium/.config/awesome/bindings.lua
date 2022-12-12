@@ -7,9 +7,11 @@ local awesome = _G.awesome
 
 local menubar = require("menubar")
 local modkey = "Mod1"
+local terminal = "alacritty"
 local bindings = {}
 
 bindings.globalkeys = gears.table.join(
+
 
 -- Sound
   awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause") end),
@@ -19,30 +21,23 @@ bindings.globalkeys = gears.table.join(
   awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer -D pulse sset Master '5%-'") end),
   awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer -D pulse sset Master toggle") end),
 
-  -- Shutdown and Reboot
-  awful.key({ modkey, "Shift" }, "=", function() awful.util.spawn("shutdown -h now") end),
-  awful.key({ modkey, }, "=", function() awful.util.spawn("systemctl reboot") end),
 
-  -- {{{ User programs
-  -- Mailspring
-  awful.key({ modkey }, "m", function() awful.util.spawn("mailspring") end,
-    { description = "run google mailspring", group = "applications" }),
+  -- User programs
   -- Google chrome
   -- awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
   --   { description = "run google chrome", group = "applications" }),
   -- Firefox
-  awful.key({ modkey }, "c", function() awful.util.spawn("firefox-developer-edition") end,
+  awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
     { description = "run google chrome", group = "applications" }),
   -- Thunar
   awful.key({ modkey }, "F2", function() awful.util.spawn("thunar") end,
     { description = "run thunar", group = "launcher" }),
-  -- Ranger with terminal
-  awful.key({ modkey }, "e", function() awful.spawn(terminal .. " -e ranger") end,
+  -- Ranger with terminal variable
+  awful.key({ modkey }, "e", function() awful.spawn(terminal .. " -T 'FileManager' -e ranger") end,
     { description = "ranger", group = "launcher" }),
   -- Flameshot
   awful.key({ "Mod4", "Shift" }, "s", function() awful.util.spawn("flameshot gui") end,
     { description = "run flameshot", group = "applications" }),
-  -- }}}
 
   awful.key({ "Mod4", }, "h", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }),
@@ -150,10 +145,7 @@ bindings.globalkeys = gears.table.join(
     { description = "restore minimized", group = "client" }),
 
   -- Menubar
-  -- awful.key({ modkey }, "p", function() menubar.show() end,
-  --   { description = "show the menubar", group = "launcher" })
-  awful.key({ modkey }, "p",
-    function() awful.util.spawn("rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi") end,
+  awful.key({ modkey }, "p", function() menubar.show() end,
     { description = "show the menubar", group = "launcher" })
 )
 
@@ -205,17 +197,17 @@ bindings.clientkeys = gears.table.join(
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-  bindings.globalkeys = gears.table.join(bindings.globalkeys,
+  globalkeys = gears.table.join(globalkeys,
     -- View tag only.
-    -- awful.key({ modkey }, "#" .. i + 9,
-    --   function()
-    --     local screen = awful.screen.focused()
-    --     local tag = screen.tags[i]
-    --     if tag then
-    --       tag:view_only()
-    --     end
-    --   end,
-    --   { description = "view tag #" .. i, group = "tag" }),
+    awful.key({ modkey }, "#" .. i + 9,
+      function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[i]
+        if tag then
+          tag:view_only()
+        end
+      end,
+      { description = "view tag #" .. i, group = "tag" }),
     -- Toggle tag display.
     awful.key({ modkey, "Control" }, "#" .. i + 9,
       function()
