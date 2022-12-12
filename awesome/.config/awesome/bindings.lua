@@ -7,9 +7,11 @@ local awesome = _G.awesome
 
 local menubar = require("menubar")
 local modkey = "Mod1"
+local terminal = "alacritty"
 local bindings = {}
 
 bindings.globalkeys = gears.table.join(
+
 
 -- Sound
   awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause") end),
@@ -22,11 +24,17 @@ bindings.globalkeys = gears.table.join(
 
   -- User programs
   -- Google chrome
+  -- awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
+  --   { description = "run google chrome", group = "applications" }),
+  -- Firefox
   awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
     { description = "run google chrome", group = "applications" }),
   -- Thunar
-  awful.key({ modkey }, "e", function() awful.util.spawn("thunar") end,
-    { description = "run thunar", group = "applications" }),
+  awful.key({ modkey }, "F2", function() awful.util.spawn("thunar") end,
+    { description = "run thunar", group = "launcher" }),
+  -- Ranger with terminal variable
+  awful.key({ modkey }, "e", function() awful.spawn(terminal .. " -T 'FileManager' -e ranger") end,
+    { description = "ranger", group = "launcher" }),
   -- Flameshot
   awful.key({ "Mod4", "Shift" }, "s", function() awful.util.spawn("flameshot gui") end,
     { description = "run flameshot", group = "applications" }),
