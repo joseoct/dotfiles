@@ -107,7 +107,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%A %d/%m/%y, %H:%M")
+mytextclock = wibox.widget.textclock("%A ✦ %d/%m/%y ✦ %H:%M")
+mytextclock.font = "JetBrains Mono 11"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -142,12 +143,16 @@ local tasklist_buttons = gears.table.join(
   awful.button({}, 3, function()
     awful.menu.client_list({ theme = { width = 250 } })
   end),
+  awful.button({}, 2, function(c)
+    c:kill()
+  end),
   awful.button({}, 4, function()
     awful.client.focus.byidx(1)
   end),
   awful.button({}, 5, function()
     awful.client.focus.byidx(-1)
-  end))
+  end)
+)
 
 local function set_wallpaper(s)
   -- Wallpaper
@@ -157,7 +162,7 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/mandala2.jpg", s, true)
+    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp3.jpg", s, true)
   end
 end
 
@@ -185,17 +190,17 @@ awful.screen.connect_for_each_screen(function(s)
   s.mytaglist = awful.widget.taglist {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons
+    buttons = taglist_buttons,
   }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist {
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons
+    buttons = tasklist_buttons,
   }
 
-  s.mywibox = awful.wibar({ position = "bottom", screen = s })
+  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#252630" })
 
   local separator = wibox.widget.textbox("  ")
 
@@ -222,7 +227,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
--- awful.button({}, 3, function() mymainmenu:toggle() end),
+  awful.button({}, 3, function() mymainmenu:toggle() end)
 -- awful.button({}, 4, awful.tag.viewnext),
 -- awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -361,30 +366,30 @@ client.connect_signal("request::titlebars", function(c)
     end)
   )
 
-  awful.titlebar(c):setup {
-    { -- Left
-      awful.titlebar.widget.iconwidget(c),
-      buttons = buttons,
-      layout  = wibox.layout.fixed.horizontal
-    },
-    { -- Middle
-      { -- Title
-        align  = "center",
-        widget = awful.titlebar.widget.titlewidget(c)
-      },
-      buttons = buttons,
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton(c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton(c),
-      awful.titlebar.widget.ontopbutton(c),
-      awful.titlebar.widget.closebutton(c),
-      layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-  }
+  -- awful.titlebar(c):setup {
+  --   { -- Left
+  --     awful.titlebar.widget.iconwidget(c),
+  --     buttons = buttons,
+  --     layout  = wibox.layout.fixed.horizontal
+  --   },
+  --   { -- Middle
+  --     { -- Title
+  --       align  = "center",
+  --       widget = awful.titlebar.widget.titlewidget(c)
+  --     },
+  --     buttons = buttons,
+  --     layout  = wibox.layout.flex.horizontal
+  --   },
+  --   { -- Right
+  --     awful.titlebar.widget.floatingbutton(c),
+  --     awful.titlebar.widget.maximizedbutton(c),
+  --     awful.titlebar.widget.stickybutton(c),
+  --     awful.titlebar.widget.ontopbutton(c),
+  --     awful.titlebar.widget.closebutton(c),
+  --     layout = wibox.layout.fixed.horizontal()
+  --   },
+  --   layout = wibox.layout.align.horizontal
+  -- }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -392,7 +397,7 @@ client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c) c.border_color = "#fb617e" end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
@@ -400,6 +405,13 @@ beautiful.notification_icon_size = 120
 beautiful.notification_border_width = 1
 beautiful.notification_border_color = '#F38BA8'
 beautiful.notification_bg = '#1E1E2E'
+beautiful.tasklist_bg_focus = '#bb97ee'
+beautiful.tasklist_fg_focus = '#252630'
+beautiful.taglist_bg_focus = '#bb97ee'
+beautiful.taglist_fg_focus = '#252630'
+beautiful.taglist_bg_urgent = '#fb617e'
+beautiful.taglist_font = "JetBrains Mono Bold 11"
+beautiful.tasklist_font = "JetBrains Mono Bold 9"
 
 local function run_once(command)
   local args_start = string.find(command, " ")
@@ -426,7 +438,7 @@ end
 
 run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
 -- run_once("sleep 1s && nitrogen --restore")
-run_once("picom")
+run_once("picom -b &")
 run_once("imwheel -b '45'")
 run_once("xset r rate 180 38")
 

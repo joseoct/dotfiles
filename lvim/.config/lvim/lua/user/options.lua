@@ -1,13 +1,14 @@
-lvim.colorscheme = "oxocarbon"
-lvim.log.level = "warn"
+lvim.colorscheme = "sonokai"
+vim.g.sonokai_style = "andromeda"
+-- vim.g.sonokai_better_performance = 1
 lvim.format_on_save = true
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = "dashboard"
+lvim.builtin.illuminate.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
-lvim.builtin.illuminate.active = false
-lvim.builtin.bufferline.active = true
+lvim.builtin.illuminate.active = true
 lvim.builtin.cmp.confirm_opts.select = true
 lvim.builtin.cmp.cmdline.enable = false
 lvim.builtin.cmp.window.documentation = false
@@ -19,6 +20,7 @@ lvim.builtin.which_key.setup.plugins.presets = {
   g = true,
   z = true
 }
+lvim.builtin.nvimtree.setup.view.adaptive_size = true
 -- lvim.transparent_window = true
 
 --{{{ Vim options

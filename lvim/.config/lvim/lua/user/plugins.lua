@@ -1,6 +1,6 @@
 lvim.plugins = {
-  { 'rebelot/kanagawa.nvim' },
-  { 'nyoom-engineering/oxocarbon.nvim' },
+  { 'svban/YankAssassin.vim' },
+  { 'pantharshit00/vim-prisma' },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",

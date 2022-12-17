@@ -31,7 +31,7 @@ bindings.globalkeys = gears.table.join(
   -- awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
   --   { description = "run google chrome", group = "applications" }),
   -- Firefox
-  awful.key({ modkey }, "c", function() awful.util.spawn("firefox-developer-edition") end,
+  awful.key({ modkey }, "c", function() awful.util.spawn("firefox") end,
     { description = "run google chrome", group = "applications" }),
   -- Thunar
   awful.key({ modkey }, "F2", function() awful.util.spawn("thunar") end,

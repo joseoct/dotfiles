@@ -21,7 +21,7 @@ alias v="lvim"
 alias s="sensors"
 
 export PATH=/home/joseoctavio/.local/bin:$PATH
-export BROWSER='google-chrome-stable'
+export BROWSER='firefox'
 export EDITOR='lvim'
 export TERM='alacritty'
 
@@ -63,7 +63,3 @@ zinit light Aloxaf/fzf-tab
 eval "$(starship init zsh)"
 
 colorscript random
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

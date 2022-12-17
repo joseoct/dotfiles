@@ -9,14 +9,11 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     vim.cmd "hi NvimTreeOpenedFolderName guifg=#b39df3 gui=italic"
     vim.cmd "hi IndentBlanklineContextChar guifg=#b39df3"
     vim.cmd "hi @tag.delimiter guifg=#a9a9a9"
-    vim.cmd "hi Keyword gui=italic"
-    vim.cmd "hi @keyword.return gui=italic guifg=#78a9ff"
-    vim.cmd "hi @type.builtin gui=italic"
-    vim.cmd "hi @tag.attribute.tsx gui=italic"
-    vim.cmd "hi Folded guifg=none"
-    vim.cmd "hi PmenuSel guifg=none"
-    vim.cmd "hi DiagnosticUnderlineError guifg=#ee536a"
-    vim.cmd "hi DiagnosticError guifg=#ee536a"
+    vim.cmd "hi @keyword gui=italic guifg=#fb617e" -- COLORSCHEME SONOKAI
+    vim.cmd "hi @keyword.return gui=italic guifg=#fb617e" -- COLORSCHEME SONOKAI
+    vim.cmd "hi IlluminatedWordText guibg=#343a79"
+    vim.cmd "hi IlluminatedWordRead guibg=#803a4e"
+    vim.cmd "hi IlluminatedWordWrite gui=underline"
   end,
 })
 

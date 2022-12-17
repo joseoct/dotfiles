@@ -1,0 +1,90 @@
+font:
+  normal:
+    family: Cascursive
+    style: Bold
+  italic:
+    family: Recursive
+    style: Italic
+
+draw_bold_text_with_bright_colors: true
+
+# window:
+#   opacity: 0.0
+
+colors:
+  primary:
+    background: "#161616" # base
+    foreground: "#CDD6F4" # text
+    # Bright and dim foreground colors
+    dim_foreground: "#CDD6F4" # text
+    bright_foreground: "#CDD6F4" # text
+
+  # Cursor colors
+  cursor:
+    text: "#161616" # base
+    cursor: "#EE5396" # rosewater
+  vi_mode_cursor:
+    text: "#1E1E2E" # base
+    cursor: "#B4BEFE" # lavender
+
+  # Search colors
+  search:
+    matches:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+    focused_match:
+      foreground: "#1E1E2E" # base
+      background: "#FF7EB6" # green
+    footer_bar:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+
+  # Keyboard regex hints
+  hints:
+    start:
+      foreground: "#1E1E2E" # base
+      background: "#42BE65" # yellow
+    end:
+      foreground: "#1E1E2E" # base
+      background: "#A6ADC8" # subtext0
+
+  # Selection colors
+  selection:
+    text: "#1E1E2E" # base
+    background: "#F5E0DC" # rosewater
+
+  # Normal colors
+  normal:
+    black: "#45475A" # surface1
+    red: "#33B1FF" # red
+    green: "#42BE65" # tem que ser o verde aqui
+    yellow: "#33B1FF" # yellow
+    blue: "#08BDBA" # blue
+    magenta: "#82CFFF" # pink
+    cyan: "#78A9FF" # teal
+    white: "#BAC2DE" # subtext1
+
+  # Bright colors
+  bright:
+    black: "#585B70" # surface2
+    red: "#FF7EB6"
+    green: "#FF7EB6" # green
+    yellow: "#42BE65" # yellow
+    blue: "#08BDBA" # blue
+    magenta: "#82CFFF" # pink
+    cyan: "#78A9FF" # teal
+    white: "#A6ADC8" # subtext0
+
+  # Dim colors
+  dim:
+    black: "#45475A" # surface1
+    red: "#33B1FF" # red
+    green: "#FF7EB6" # green
+    yellow: "#42BE65" # yellow
+    blue: "#08BDBA" # blue
+    magenta: "#82CFFF" # pink
+    cyan: "#78A9FF" # teal
+    white: "#BAC2DE" # subtext1
+
+key_bindings:
+  - { key: Back, mods: Control, chars: "\x17" }

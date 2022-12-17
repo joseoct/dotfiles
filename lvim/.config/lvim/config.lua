@@ -11,7 +11,6 @@ reload "user.cmd"
 reload "user.lsp"
 reload "user.keymaps"
 reload "user.todo-comments"
-reload "user.cmp"
 
 local banner = require "user.banners"
 

@@ -20,10 +20,10 @@ require("typescript").setup {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   -- { command = "prettier", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
-  -- {
-  --   command = "eslint_d",
-  --   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-  -- }
+  {
+    command = "eslint_d",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  }
 }
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
@@ -57,5 +57,5 @@ end
 -- Set a linter.
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup {
-  -- { command = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
+  { command = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
 }

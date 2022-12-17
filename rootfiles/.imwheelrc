@@ -1,4 +1,4 @@
-"(firefox*)|(Alacritty)|(Thunar)|(chatterino)|(code)"
+"(firefox*)|(Alacritty)|(Thunar)|(chatterino)|(code)|(Steam)"
 None, Up, Button4, 1
 None, Down, Button5, 1
 Control_L, Up, Control_L|Button4
