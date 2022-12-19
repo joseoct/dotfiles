@@ -4,7 +4,6 @@ pcall(require, "luarocks.loader")
 
 -- Standard awesome library
 local gears = require("gears")
-local cr = require("lgi").cairo
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
@@ -20,6 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local bindings = require("bindings")
 
+local mywidgetlayout = require("mywidgetlayout")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -108,8 +108,9 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%A ✦ %d/%m/%y ✦ %H:%M")
-mytextclock.font = "Recursive Bold 11"
+clockdayanddate = wibox.widget.textclock("%A ✦ %d/%m/%y")
+clocktime = wibox.widget.textclock("%H:%M")
+-- mytextclock.font = "Recursive Bold 11"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -188,22 +189,85 @@ awful.screen.connect_for_each_screen(function(s)
     awful.button({}, 4, function() awful.layout.inc(1) end),
     awful.button({}, 5, function() awful.layout.inc(-1) end)))
   -- Create a taglist widget
+
+  local new_shape = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, 4)
+  end
+
   s.mytaglist = awful.widget.taglist {
-    screen  = s,
-    filter  = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons,
+    screen          = s,
+    filter          = awful.widget.taglist.filter.all,
+    buttons         = taglist_buttons,
+    style           = {
+      shape = new_shape
+    },
+    widget_template =
+    {
+      {
+        {
+          {
+            {
+              id     = 'text_role',
+              widget = wibox.widget.textbox,
+            },
+            layout = wibox.layout.fixed.horizontal,
+          },
+          left   = 7,
+          right  = 7,
+          widget = wibox.container.margin
+        },
+        id     = 'background_role',
+        widget = wibox.container.background,
+      },
+      margins = 3,
+      widget  = wibox.container.margin
+    },
   }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist {
-    screen  = s,
-    filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons,
+    screen          = s,
+    filter          = awful.widget.tasklist.filter.currenttags,
+    buttons         = tasklist_buttons,
+    style           = {
+      shape_border_width = 1,
+      shape_border_color = '#bb97ee',
+      shape              = new_shape
+    },
+    widget_template =
+    {
+      {
+        {
+          {
+            {
+              {
+                id     = 'icon_role',
+                widget = wibox.widget.imagebox,
+              },
+              margins = 2,
+              widget  = wibox.container.margin,
+            },
+            {
+              id     = 'text_role',
+              widget = wibox.widget.textbox,
+            },
+            layout = wibox.layout.fixed.horizontal,
+          },
+          left   = 7,
+          right  = 7,
+          widget = wibox.container.margin
+        },
+        id     = 'background_role',
+        widget = wibox.container.background,
+      },
+      margins = 3,
+      widget  = wibox.container.margin
+    },
   }
 
-  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#252630", height = 30 })
+  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#181a1c", height = 30 })
 
-  local separator = wibox.widget.textbox("  ")
+  local separator = wibox.widget.textbox(" ")
 
   local new_shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, 4)
@@ -219,30 +283,13 @@ awful.screen.connect_for_each_screen(function(s)
       s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
+    -- mywidgetlayout(maitasklist, "#94E2D5")
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      wibox.widget.systray(),
+      -- wibox.widget.systray(),
+      mywidgetlayout(clockdayanddate, "#fb617e"),
       separator,
-      { -- Right Side
-        {
-
-          {
-            {
-              mytextclock,
-              layout = wibox.layout.fixed.horizontal
-            },
-            left = 7,
-            right = 7,
-            widget = wibox.container.margin
-          },
-          bg     = "#94E2D5",
-          fg     = "#45475A",
-          shape  = new_shape,
-          widget = wibox.container.background
-        },
-        margins = 3,
-        widget  = wibox.container.margin
-      },
+      mywidgetlayout(clocktime, "#9ed06c")
     },
   }
 end)
@@ -428,13 +475,21 @@ beautiful.notification_icon_size = 120
 beautiful.notification_border_width = 1
 beautiful.notification_border_color = '#F38BA8'
 beautiful.notification_bg = '#1E1E2E'
+
 beautiful.tasklist_bg_focus = '#bb97ee'
+beautiful.tasklist_bg_normal = '#181a1c'
+beautiful.tasklist_fg_normal = '#bb97ee'
 beautiful.tasklist_fg_focus = '#252630'
-beautiful.taglist_bg_focus = '#bb97ee'
+beautiful.tasklist_font = "Recursive Bold 10"
+
+beautiful.taglist_bg_focus = '#6dcae8'
 beautiful.taglist_fg_focus = '#252630'
+beautiful.taglist_fg_occupied = '#bb97ee'
+beautiful.taglist_fg_empty = '#ffffff'
 beautiful.taglist_bg_urgent = '#fb617e'
-beautiful.taglist_font = "JetBrains Mono Bold 11"
-beautiful.tasklist_font = "JetBrains Mono Bold 9"
+beautiful.taglist_font = "Recursive Bold 10"
+beautiful.taglist_squares_sel = "/home/joseoctavio/Pictures/bar-sel.png"
+beautiful.taglist_squares_unsel = "/home/joseoctavio/Pictures/bar-sel.png"
 
 local function run_once(command)
   local args_start = string.find(command, " ")
