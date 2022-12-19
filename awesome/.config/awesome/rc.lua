@@ -4,6 +4,7 @@ pcall(require, "luarocks.loader")
 
 -- Standard awesome library
 local gears = require("gears")
+local cr = require("lgi").cairo
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
@@ -108,7 +109,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%A ✦ %d/%m/%y ✦ %H:%M")
-mytextclock.font = "JetBrains Mono 11"
+mytextclock.font = "Recursive Bold 11"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -162,7 +163,7 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp3.jpg", s, true)
+    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp1.jpg", s, true)
   end
 end
 
@@ -200,9 +201,13 @@ awful.screen.connect_for_each_screen(function(s)
     buttons = tasklist_buttons,
   }
 
-  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#252630" })
+  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#252630", height = 30 })
 
   local separator = wibox.widget.textbox("  ")
+
+  local new_shape = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, 4)
+  end
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -218,8 +223,26 @@ awful.screen.connect_for_each_screen(function(s)
       layout = wibox.layout.fixed.horizontal,
       wibox.widget.systray(),
       separator,
-      mytextclock,
-      separator,
+      { -- Right Side
+        {
+
+          {
+            {
+              mytextclock,
+              layout = wibox.layout.fixed.horizontal
+            },
+            left = 7,
+            right = 7,
+            widget = wibox.container.margin
+          },
+          bg     = "#94E2D5",
+          fg     = "#45475A",
+          shape  = new_shape,
+          widget = wibox.container.background
+        },
+        margins = 3,
+        widget  = wibox.container.margin
+      },
     },
   }
 end)
@@ -438,7 +461,7 @@ end
 
 run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
 -- run_once("sleep 1s && nitrogen --restore")
-run_once("picom -b &")
+run_once("picom") -- picom -b cause display freeze
 run_once("imwheel -b '45'")
 run_once("xset r rate 180 38")
 
