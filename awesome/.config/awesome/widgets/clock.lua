@@ -46,7 +46,9 @@ local mywidgetlayout = function(clockwidget, icon, bg)
     widget    = wibox.container.margin
   }
 
-  return m;
+  local only_on_primary = awful.widget.only_on_screen(m, awful.screen.primary)
+
+  return only_on_primary;
 end
 
 return mywidgetlayout
