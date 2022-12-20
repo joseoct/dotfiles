@@ -11,8 +11,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     vim.cmd "hi @tag.delimiter guifg=#a9a9a9"
     vim.cmd "hi @keyword gui=italic guifg=#fb617e" -- COLORSCHEME SONOKAI
     vim.cmd "hi @keyword.return gui=italic guifg=#fb617e" -- COLORSCHEME SONOKAI
-    vim.cmd "hi IlluminatedWordText guibg=#343a79"
-    vim.cmd "hi IlluminatedWordRead guibg=#803a4e"
+    vim.cmd "hi IlluminatedWordText gui=underline"
+    vim.cmd "hi IlluminatedWordRead gui=underline"
     vim.cmd "hi IlluminatedWordWrite gui=underline"
   end,
 })

@@ -16,10 +16,15 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
+
+-- USER {{{
 require("awful.hotkeys_popup.keys")
 local bindings = require("bindings")
+local brightness_widget = require("widgets.brightness")
+local volume_widget = require("widgets.volume")
+local clock_widget = require("widgets.clock")
+-- }}}
 
-local mywidgetlayout = require("mywidgetlayout")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -108,7 +113,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-clockdayanddate = wibox.widget.textclock("%A ✦ %d/%m/%y")
+clockdate = wibox.widget.textclock("%A %d/%m/%y")
 clocktime = wibox.widget.textclock("%H:%M")
 -- mytextclock.font = "Recursive Bold 11"
 
@@ -164,7 +169,7 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp1.jpg", s, true)
+    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp1.png", s, true)
   end
 end
 
@@ -231,7 +236,7 @@ awful.screen.connect_for_each_screen(function(s)
     buttons         = tasklist_buttons,
     style           = {
       shape_border_width = 1,
-      shape_border_color = '#bb97ee',
+      -- shape_border_color = '#89DCEB',
       shape              = new_shape
     },
     widget_template =
@@ -244,7 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
                 id     = 'icon_role',
                 widget = wibox.widget.imagebox,
               },
-              margins = 2,
+              margins = 4,
               widget  = wibox.container.margin,
             },
             {
@@ -265,7 +270,7 @@ awful.screen.connect_for_each_screen(function(s)
     },
   }
 
-  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#181a1c", height = 30 })
+  s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#1E1E2E", height = 30 })
 
   local separator = wibox.widget.textbox(" ")
 
@@ -283,13 +288,16 @@ awful.screen.connect_for_each_screen(function(s)
       s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
-    -- mywidgetlayout(maitasklist, "#94E2D5")
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- wibox.widget.systray(),
-      mywidgetlayout(clockdayanddate, "#fb617e"),
+      brightness_widget("#A6E3A1"),
       separator,
-      mywidgetlayout(clocktime, "#9ed06c")
+      volume_widget("#f9e2af"),
+      separator,
+      clock_widget(clockdate, "/home/joseoctavio/.config/awesome/widgets/icons/calendar.svg", "#F38BA8"),
+      separator,
+      clock_widget(clocktime, "/home/joseoctavio/.config/awesome/widgets/icons/time.svg", "#CBA6F7"),
     },
   }
 end)
@@ -467,8 +475,8 @@ client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
-client.connect_signal("focus", function(c) c.border_color = "#fb617e" end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c) c.border_color = "#65659a" end)
+client.connect_signal("unfocus", function(c) c.border_color = "#1e1e2e" end)
 -- }}}
 
 beautiful.notification_icon_size = 120
@@ -476,20 +484,23 @@ beautiful.notification_border_width = 1
 beautiful.notification_border_color = '#F38BA8'
 beautiful.notification_bg = '#1E1E2E'
 
-beautiful.tasklist_bg_focus = '#bb97ee'
-beautiful.tasklist_bg_normal = '#181a1c'
-beautiful.tasklist_fg_normal = '#bb97ee'
-beautiful.tasklist_fg_focus = '#252630'
+beautiful.tasklist_bg_focus = '#1E1E2E'
+beautiful.tasklist_fg_focus = '#89DCEB'
+beautiful.tasklist_bg_normal = '#1E1E2E'
+beautiful.tasklist_fg_normal = '#47476c'
+beautiful.tasklist_shape_border_color_focus = '#89DCEB'
+beautiful.tasklist_shape_border_color = '#47476c'
 beautiful.tasklist_font = "Recursive Bold 10"
 
-beautiful.taglist_bg_focus = '#6dcae8'
-beautiful.taglist_fg_focus = '#252630'
-beautiful.taglist_fg_occupied = '#bb97ee'
+beautiful.taglist_bg_focus = '#B4BEFE'
+beautiful.taglist_fg_focus = '#1E1E2E'
+beautiful.taglist_fg_occupied = '#F5C2E7'
+beautiful.taglist_bg_occupied = '#28283e'
 beautiful.taglist_fg_empty = '#ffffff'
-beautiful.taglist_bg_urgent = '#fb617e'
-beautiful.taglist_font = "Recursive Bold 10"
-beautiful.taglist_squares_sel = "/home/joseoctavio/Pictures/bar-sel.png"
-beautiful.taglist_squares_unsel = "/home/joseoctavio/Pictures/bar-sel.png"
+beautiful.taglist_bg_urgent = '#F38BA8'
+beautiful.taglist_font = "JetBrains Bold 10"
+beautiful.taglist_squares_sel = "/home/joseoctavio/.config/awesome/bar.png"
+beautiful.taglist_squares_unsel = "/home/joseoctavio/.config/awesome/bar.png"
 
 local function run_once(command)
   local args_start = string.find(command, " ")

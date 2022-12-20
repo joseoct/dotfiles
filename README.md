@@ -1,5 +1,8 @@
 # Dotfiles
 
+## [awesomewm] catppuccin(mocha)
+![Awesome catppuccin rice.](https://i.imgur.com/znwS7V9.png")
+
 **Dotfiles organized for [stow] command**
 
 Clone this repository and run stow for each configuration folder
@@ -24,3 +27,4 @@ rootfiles folder contains configuration for
 ```
   yay easystroke
 ```
+

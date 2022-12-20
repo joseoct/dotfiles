@@ -20,8 +20,9 @@ bindings.globalkeys = gears.table.join(
   awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer -D pulse sset Master toggle") end),
 
   -- Shutdown and Reboot
-  awful.key({ modkey, "Shift" }, "=", function() awful.util.spawn("shutdown -h now") end),
-  awful.key({ modkey, }, "=", function() awful.util.spawn("systemctl reboot") end),
+  awful.key({ modkey, }, "=",
+    function() awful.util.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu") end)
+  ,
 
   -- {{{ User programs
   -- Mailspring
@@ -150,11 +151,14 @@ bindings.globalkeys = gears.table.join(
     { description = "restore minimized", group = "client" }),
 
   -- Menubar
+  -- awful.key({ modkey }, "p",
+  --   function() awful.util.spawn("rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi") end,
+  --   { description = "show the menubar", group = "launcher" })
   -- awful.key({ modkey }, "p", function() menubar.show() end,
   --   { description = "show the menubar", group = "launcher" })
   awful.key({ modkey }, "p",
-    function() awful.util.spawn("rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi") end,
-    { description = "show the menubar", group = "launcher" })
+    function() awful.util.spawn("rofi -show drun") end,
+    { description = "rofi drun", group = "launcher" })
 )
 
 bindings.clientkeys = gears.table.join(
