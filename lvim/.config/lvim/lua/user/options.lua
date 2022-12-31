@@ -1,5 +1,6 @@
-lvim.colorscheme = "sonokai"
-vim.g.sonokai_style = "andromeda"
+lvim.colorscheme = "gruvbox-material"
+vim.g.gruvbox_material_foreground = "original"
+-- vim.g.sonokai_style = "andromeda"
 -- vim.g.sonokai_better_performance = 1
 lvim.format_on_save = true
 lvim.builtin.alpha.active = true
@@ -9,18 +10,17 @@ lvim.builtin.illuminate.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.illuminate.active = true
+lvim.builtin.dap.active = true
 lvim.builtin.cmp.confirm_opts.select = true
-lvim.builtin.cmp.cmdline.enable = false
-lvim.builtin.cmp.window.documentation = false
-lvim.builtin.cmp.window.completion = {
-  border = "rounded",
-  winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-}
 lvim.builtin.which_key.setup.plugins.presets = {
   g = true,
   z = true
 }
 lvim.builtin.nvimtree.setup.view.adaptive_size = true
+local banner = require "user.banners"
+lvim.builtin.alpha.dashboard.section.header = {
+  val = banner.dashboard(),
+}
 -- lvim.transparent_window = true
 
 --{{{ Vim options

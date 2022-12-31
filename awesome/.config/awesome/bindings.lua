@@ -19,29 +19,28 @@ bindings.globalkeys = gears.table.join(
   awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer -D pulse sset Master '5%-'") end),
   awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer -D pulse sset Master toggle") end),
 
-  -- Shutdown and Reboot
+  -- Roffi power-menu
   awful.key({ modkey, }, "=",
-    function() awful.util.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu") end)
-  ,
+    function() awful.spawn.with_shell("$HOME/.config/rofi/scripts/powermenu_t2") end),
 
   -- {{{ User programs
-  -- Mailspring
-  awful.key({ modkey }, "m", function() awful.util.spawn("mailspring") end,
-    { description = "run google mailspring", group = "applications" }),
   -- Google chrome
   -- awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
   --   { description = "run google chrome", group = "applications" }),
   -- Firefox
-  awful.key({ modkey }, "c", function() awful.util.spawn("firefox") end,
+  awful.key({ modkey }, "c", function() awful.spawn("firefox") end,
     { description = "run google chrome", group = "applications" }),
   -- Thunar
-  awful.key({ modkey }, "F2", function() awful.util.spawn("thunar") end,
+  awful.key({ modkey }, "F2", function() awful.spawn("thunar") end,
     { description = "run thunar", group = "launcher" }),
   -- Ranger with terminal
   awful.key({ modkey }, "e", function() awful.spawn(terminal .. " -e ranger") end,
-    { description = "ranger", group = "launcher" }),
+    { description = "run ranger", group = "launcher" }),
+  -- LunarVim
+  awful.key({ modkey }, "v", function() awful.spawn(terminal .. " -e lvim") end,
+    { description = "run lunarvim", group = "launcher" }),
   -- Flameshot
-  awful.key({ "Mod4", "Shift" }, "s", function() awful.util.spawn("flameshot gui") end,
+  awful.key({ "Mod4", "Shift" }, "s", function() awful.spawn("flameshot gui") end,
     { description = "run flameshot", group = "applications" }),
   -- }}}
 
@@ -157,7 +156,7 @@ bindings.globalkeys = gears.table.join(
   -- awful.key({ modkey }, "p", function() menubar.show() end,
   --   { description = "show the menubar", group = "launcher" })
   awful.key({ modkey }, "p",
-    function() awful.util.spawn("rofi -show drun") end,
+    function() awful.spawn.with_shell("$HOME/.config/rofi/scripts/launcher_t3") end,
     { description = "rofi drun", group = "launcher" })
 )
 

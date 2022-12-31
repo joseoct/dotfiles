@@ -56,7 +56,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = "lvim"
+editor = "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -86,36 +86,9 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", terminal .. " -e man awesome" },
-  { "edit config", editor_cmd .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-  { "open terminal", terminal }
-}
-})
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-  menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
--- {{{ Wibar
 -- Create a textclock widget
 clockdate = wibox.widget.textclock("%A %d/%m/%y")
 clocktime = wibox.widget.textclock("%H:%M")
--- mytextclock.font = "Recursive Bold 11"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -169,7 +142,7 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp1.png", s, true)
+    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp3.png", s, true)
   end
 end
 
@@ -181,19 +154,7 @@ awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
 
   -- Each screen has its own tag table.
-  awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
-
-  -- Create a promptbox for each screen
-  s.mypromptbox = awful.widget.prompt()
-  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-  -- We need one layoutbox per screen.
-  s.mylayoutbox = awful.widget.layoutbox(s)
-  s.mylayoutbox:buttons(gears.table.join(
-    awful.button({}, 1, function() awful.layout.inc(1) end),
-    awful.button({}, 3, function() awful.layout.inc(-1) end),
-    awful.button({}, 4, function() awful.layout.inc(1) end),
-    awful.button({}, 5, function() awful.layout.inc(-1) end)))
-  -- Create a taglist widget
+  awful.tag({ "dev", "web", "chat", "mail", "files" }, s, awful.layout.layouts[1])
 
   local new_shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, 4)
@@ -262,7 +223,8 @@ awful.screen.connect_for_each_screen(function(s)
           right  = 7,
           widget = wibox.container.margin
         },
-        id     = 'background_role',
+        id = 'background_role',
+        forced_width = 260,
         widget = wibox.container.background,
       },
       margins = 3,
@@ -272,43 +234,43 @@ awful.screen.connect_for_each_screen(function(s)
 
   s.mywibox = awful.wibar({ position = "bottom", screen = s, bg = "#1E1E2E", height = 30 })
 
-  local separator = wibox.widget.textbox(" ")
 
   local new_shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, 4)
   end
 
+  -- for screen_name, _ in pairs(s.outputs) do
+  --   if screen_name == "DP-0" then
+  --     s.mywibox:setup {
+  --       layout = wibox.layout.align.horizontal,
+  --       s.mytaglist,
+  --       s.mytasklist,
+  --     }
+  --   end
+  -- end
+  --
+  local separator = wibox.widget.textbox("      ")
+
   -- Add widgets to the wibox
   s.mywibox:setup {
     layout = wibox.layout.align.horizontal,
-    expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       s.mytaglist,
-      s.mypromptbox,
+      separator,
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
+      separator,
       layout = wibox.layout.fixed.horizontal,
       -- wibox.widget.systray(),
       brightness_widget("#A6E3A1"),
-      separator,
       volume_widget("#f9e2af"),
-      separator,
       clock_widget(clockdate, "/home/joseoctavio/.config/awesome/widgets/icons/calendar.svg", "#F38BA8"),
-      separator,
       clock_widget(clocktime, "/home/joseoctavio/.config/awesome/widgets/icons/time.svg", "#CBA6F7"),
     },
   }
 end)
--- }}}
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-  awful.button({}, 3, function() mymainmenu:toggle() end)
--- awful.button({}, 4, awful.tag.viewnext),
--- awful.button({}, 5, awful.tag.viewprev)
-))
 -- }}}
 
 -- Key bindings
@@ -372,46 +334,49 @@ awful.rules.rules = {
   -- {{{ My rules
   {
     rule = { class = "Alacritty" },
-    properties = { tag = "1", switchtotag = true }
+    properties = { tag = "dev", switchtotag = true }
   },
   {
     rule = { class = "Code" },
-    properties = { tag = "1", switchtotag = true }
+    properties = { tag = "dev", switchtotag = true }
   },
   {
     rule = { class = "Google-chrome" },
-    properties = { tag = "2", switchtotag = true }
+    properties = { tag = "web", switchtotag = true }
   },
   {
     rule = { class = "firefox" },
-    properties = { tag = "2", switchtotag = true }
+    properties = { tag = "web", switchtotag = true }
   },
   {
     rule = { class = "discord" },
-    properties = { tag = "3", switchtotag = true }
+    properties = { tag = "chat", switchtotag = true }
   },
   {
     rule = { class = "Mailspring" },
-    properties = { tag = "4", screen = 1 }
+    properties = { tag = "mail", screen = 1 }
+  },
+  {
+    rule = { class = "Evolution" },
+    properties = { tag = "mail", screen = 1 }
+  },
+  {
+    rule = { class = "Thunar" },
+    properties = { tag = "files", screen = 1, switchtotag = true }
   },
   {
     rule = { class = "mpv" },
-    properties = { tag = "5", switchtotag = false }
+    properties = { tag = "files", switchtotag = false }
   },
   {
     rule = { class = "streamlink-twitch-gui" },
-    properties = { tag = "5", screen = 1 }
+    properties = { tag = "files", screen = 1 }
   },
   {
     rule = { class = "chatterino" },
-    properties = { tag = "5", screen = 1 }
+    properties = { tag = "files", screen = 1 }
   },
   -- }}}
-
-
-  -- Set Firefox to always map on the tag named "2" on screen 1.
-  -- { rule = { class = "Firefox" },
-  --   properties = { screen = 1, tag = "2" } },
 }
 -- }}}
 
@@ -430,46 +395,6 @@ client.connect_signal("manage", function(c)
   end
 end)
 
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-  -- buttons for the titlebar
-  local buttons = gears.table.join(
-    awful.button({}, 1, function()
-      c:emit_signal("request::activate", "titlebar", { raise = true })
-      awful.mouse.client.move(c)
-    end),
-    awful.button({}, 3, function()
-      c:emit_signal("request::activate", "titlebar", { raise = true })
-      awful.mouse.client.resize(c)
-    end)
-  )
-
-  -- awful.titlebar(c):setup {
-  --   { -- Left
-  --     awful.titlebar.widget.iconwidget(c),
-  --     buttons = buttons,
-  --     layout  = wibox.layout.fixed.horizontal
-  --   },
-  --   { -- Middle
-  --     { -- Title
-  --       align  = "center",
-  --       widget = awful.titlebar.widget.titlewidget(c)
-  --     },
-  --     buttons = buttons,
-  --     layout  = wibox.layout.flex.horizontal
-  --   },
-  --   { -- Right
-  --     awful.titlebar.widget.floatingbutton(c),
-  --     awful.titlebar.widget.maximizedbutton(c),
-  --     awful.titlebar.widget.stickybutton(c),
-  --     awful.titlebar.widget.ontopbutton(c),
-  --     awful.titlebar.widget.closebutton(c),
-  --     layout = wibox.layout.fixed.horizontal()
-  --   },
-  --   layout = wibox.layout.align.horizontal
-  -- }
-end)
-
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
@@ -484,11 +409,13 @@ beautiful.notification_border_width = 1
 beautiful.notification_border_color = '#F38BA8'
 beautiful.notification_bg = '#1E1E2E'
 
-beautiful.tasklist_bg_focus = '#1E1E2E'
-beautiful.tasklist_fg_focus = '#89DCEB'
+beautiful.tasklist_bg_focus = '#47476c'
+beautiful.tasklist_fg_focus = '#c1c1d7'
 beautiful.tasklist_bg_normal = '#1E1E2E'
 beautiful.tasklist_fg_normal = '#47476c'
-beautiful.tasklist_shape_border_color_focus = '#89DCEB'
+beautiful.tasklist_bg_minimize = '#d1d1e1'
+beautiful.tasklist_fg_minimize = '#47476c'
+beautiful.tasklist_shape_border_color_focus = '#47476c'
 beautiful.tasklist_shape_border_color = '#47476c'
 beautiful.tasklist_font = "Recursive Bold 10"
 
@@ -498,7 +425,7 @@ beautiful.taglist_fg_occupied = '#F5C2E7'
 beautiful.taglist_bg_occupied = '#28283e'
 beautiful.taglist_fg_empty = '#ffffff'
 beautiful.taglist_bg_urgent = '#F38BA8'
-beautiful.taglist_font = "JetBrains Bold 10"
+beautiful.taglist_font = "Recursive Bold 10"
 beautiful.taglist_squares_sel = "/home/joseoctavio/.config/awesome/bar.png"
 beautiful.taglist_squares_unsel = "/home/joseoctavio/.config/awesome/bar.png"
 
@@ -527,9 +454,10 @@ end
 
 run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
 -- run_once("sleep 1s && nitrogen --restore")
-run_once("picom") -- picom -b cause display freeze
+run_once("picom &") -- picom -b cause display freeze
 run_once("imwheel -b '45'")
 run_once("xset r rate 180 38")
+run_once("evolution")
 
 -- run_once("easystroke")
 -- run_once("flameshot")

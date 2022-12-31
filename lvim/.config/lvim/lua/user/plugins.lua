@@ -1,6 +1,17 @@
 lvim.plugins = {
-  { 'svban/YankAssassin.vim' },
-  { 'pantharshit00/vim-prisma' },
+  -- {{{ Themes
+  { "sainnhe/gruvbox-material" },
+  { "sainnhe/sonokai" },
+  { "catppuccin/nvim", as = "catppuccin" },
+  -- }}}
+  { "svban/YankAssassin.vim" },
+  { "pantharshit00/vim-prisma" },
+  { "mxsdev/nvim-dap-vscode-js" },
+  { "nvim-treesitter/playground" },
+  { "github/copilot.vim" },
+  { "tpope/vim-surround" },
+  { "ThePrimeagen/harpoon" },
+  { "p00f/nvim-ts-rainbow" },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -8,7 +19,6 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
-  { "mxsdev/nvim-dap-vscode-js" },
   {
     "jose-elias-alvarez/typescript.nvim",
     config = function()
@@ -19,7 +29,6 @@ lvim.plugins = {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
   },
-  { "nvim-treesitter/playground" },
   {
     "romgrk/nvim-treesitter-context",
     config = function()
@@ -57,11 +66,6 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-  -- { "justinmk/vim-sneak" },
-  { "github/copilot.vim" },
-  { "tpope/vim-surround" },
-  { "ThePrimeagen/harpoon" },
-  { "p00f/nvim-ts-rainbow" },
   {
     "ggandor/leap.nvim",
     config = function()
@@ -94,6 +98,4 @@ lvim.plugins = {
       })
     end,
   },
-  { "sainnhe/sonokai" },
-  { "catppuccin/nvim", as = "catppuccin" },
 }

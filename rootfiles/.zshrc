@@ -20,8 +20,10 @@ alias ra="ranger"
 alias v="lvim"
 alias s="sensors"
 
-export PATH=/home/joseoctavio/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.config/rofi/scripts:$PATH
 export BROWSER='firefox'
+export VISUAL='lvim'
 export EDITOR='lvim'
 export TERM='alacritty'
 

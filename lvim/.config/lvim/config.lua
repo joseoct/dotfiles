@@ -12,8 +12,7 @@ reload "user.lsp"
 reload "user.keymaps"
 reload "user.todo-comments"
 
-local banner = require "user.banners"
-
-lvim.builtin.alpha.dashboard.section.header = {
-  val = banner.dashboard(),
-}
+-- Neovide
+vim.opt.guifont = "JetBrainsMono Nerd Font:h11"
+-- vim.opt.guifont = "Cascursive:h11"
+--
