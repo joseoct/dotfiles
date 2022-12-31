@@ -23,6 +23,7 @@ local bindings = require("bindings")
 local brightness_widget = require("widgets.brightness")
 local volume_widget = require("widgets.volume")
 local clock_widget = require("widgets.clock")
+local spotify_widget = require("widgets.spotify")
 -- }}}
 
 -- {{{ Error handling
@@ -249,7 +250,7 @@ awful.screen.connect_for_each_screen(function(s)
   --   end
   -- end
   --
-  local separator = wibox.widget.textbox("      ")
+  local separator = wibox.widget.textbox("   ")
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -261,9 +262,15 @@ awful.screen.connect_for_each_screen(function(s)
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
-      separator,
       layout = wibox.layout.fixed.horizontal,
+      separator,
       -- wibox.widget.systray(),
+      spotify_widget({
+        font = 'Recursive Bold 10',
+        play_icon = '/home/joseoctavio/.config/awesome/widgets/icons/spotify-fill.svg',
+        pause_icon = '/home/joseoctavio/.config/awesome/widgets/icons/spotify.svg',
+        bg = '#74C7EC'
+      }),
       brightness_widget("#A6E3A1"),
       volume_widget("#f9e2af"),
       clock_widget(clockdate, "/home/joseoctavio/.config/awesome/widgets/icons/calendar.svg", "#F38BA8"),
