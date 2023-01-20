@@ -40,16 +40,11 @@ local function worker(user_args)
   local dim_when_paused = args.dim_when_paused == nil and false or args.dim_when_paused
   local dim_opacity = args.dim_opacity or 0.2
   local max_length = args.max_length or 50
-  local show_tooltip = args.show_tooltip == nil and true or args.show_tooltip
   local timeout = args.timeout or 1
   local sp_bin = args.sp_bin or 'sp'
 
   local GET_SPOTIFY_STATUS_CMD = sp_bin .. ' status'
   local GET_CURRENT_SONG_CMD = sp_bin .. ' current'
-
-  local cur_artist = ''
-  local cur_title = ''
-  local cur_album = ''
 
   spotify_widget = wibox.widget
   {
@@ -77,11 +72,16 @@ local function worker(user_args)
         },
         {
           {
-            id = 'titlew',
-            font = 'Recursive 10',
-            widget = wibox.widget.textbox
-          },
-          right = 7,
+            layout = wibox.container.scroll.horizontal,
+            max_size = 100,
+            step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
+            speed = 40,
+            {
+              id = 'titlew',
+              font = 'Recursive 10',
+              widget = wibox.widget.textbox
+            }
+          }, right = 7,
           left = 4,
           widget = wibox.container.margin
         },
@@ -163,22 +163,6 @@ local function worker(user_args)
       update_widget_icon(spotify_widget, stdout, stderr, exitreason, exitcode)
     end)
   end)
-
-
-  if show_tooltip then
-    local spotify_tooltip = awful.tooltip {
-      mode = 'outside',
-      preferred_positions = { 'bottom' },
-    }
-
-    spotify_tooltip:add_to_object(spotify_widget)
-
-    spotify_widget:connect_signal('mouse::enter', function()
-      spotify_tooltip.markup = '<b>Album</b>: ' .. cur_album
-          .. '\n<b>Artist</b>: ' .. cur_artist
-          .. '\n<b>Song</b>: ' .. cur_title
-    end)
-  end
 
   local only_on_primary = awful.widget.only_on_screen(spotify_widget, awful.screen.primary)
 

@@ -8,6 +8,8 @@ lvim.builtin.which_key.mappings["a"] = {
 
 lvim.builtin.which_key.mappings.l.a = { '<cmd>CodeActionMenu<cr>', "Code Action ui" }
 
+lvim.builtin.which_key.mappings.l.S = { '<cmd>SymbolsOutline<cr>', "SymbolsOutline" }
+
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },

@@ -1,6 +1,8 @@
 lvim.plugins = {
-  -- {{{ Themes
+  { "EdenEast/nightfox.nvim" },
+  { "rose-pine/neovim" },
   { "sainnhe/gruvbox-material" },
+  { "Mofiqul/dracula.nvim" },
   { "sainnhe/sonokai" },
   { "catppuccin/nvim", as = "catppuccin" },
   -- }}}
@@ -11,7 +13,12 @@ lvim.plugins = {
   { "github/copilot.vim" },
   { "tpope/vim-surround" },
   { "ThePrimeagen/harpoon" },
-  { "p00f/nvim-ts-rainbow" },
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require('symbols-outline').setup({})
+    end
+  },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",

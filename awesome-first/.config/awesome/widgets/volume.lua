@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local spawn = require("awful.spawn")
 local awful = require("awful")
+local naughty = require("naughty")
 
 local new_shape = function(cr, width, height)
   gears.shape.rounded_rect(cr, width, height, 4)
@@ -14,7 +15,7 @@ local mywidgetlayout = function(bg)
       {
         {
           {
-            image = "/home/joseoctavio/.config/awesome/widgets/icons/brightness.svg",
+            image = "/home/joseoctavio/.config/awesome/widgets/icons/volume.svg",
             resize = true,
             widget = wibox.widget.imagebox
           },
@@ -50,33 +51,33 @@ local mywidgetlayout = function(bg)
   }
 
   local update_widget = function(widget)
-    spawn.easy_async("light -G", function(out)
-      widget:set_value(string.format("%.0f", out))
+    spawn.easy_async("amixer sget Master", function(out)
+      widget:set_value(string.match(out, "%[(%d+%%)%]"))
     end)
   end
 
   local on_init = function()
-    spawn.easy_async("light -S 50", function()
+    spawn.easy_async("amixer set Master 50%", function()
       update_widget(m)
     end)
   end
 
   function m:inc()
-    spawn.easy_async("light -A 10", function()
+    spawn.easy_async("amixer set Master 10%+", function()
       update_widget(m)
     end)
   end
 
   function m:dec()
-    spawn.easy_async("light -U 10", function()
+    spawn.easy_async("amixer set Master 10%-", function()
       update_widget(m)
     end)
   end
 
   m.widget:buttons(
     awful.util.table.join(
-      awful.button({}, 1, function() m:inc() end),
-      awful.button({}, 3, function() m:dec() end)
+      awful.button({}, 4, function() m:inc() end),
+      awful.button({}, 5, function() m:dec() end)
     )
   )
 

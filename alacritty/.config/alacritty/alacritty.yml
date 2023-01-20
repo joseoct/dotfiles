@@ -1,38 +1,34 @@
 font:
   normal:
     family: JetBrainsMono Nerd Font
-    style: Bold
+    style: SemiBold
   italic:
     family: Recursive
-    style: Italic
-
+  size: 11 
 
 draw_bold_text_with_bright_colors: true
 
-# window:
-#   opacity: 0.0
-
 colors:
   primary:
-    background: "0x2b2d3a"
-    foreground: "0xe1e3e4"
+    background: "0x2c2e34"
+    foreground: "0xe2e2e3"
 
   normal:
-    black: "0x181a1c"
-    red: "0xfb617e"
-    green: "0x9ed06c"
-    yellow: "0xedc763"
-    blue: "0x6dcae8"
-    magenta: "0xbb97ee"
-    cyan: "0xf89860"
-    white: "0xe1e3e4"
+    black: "0x181819"
+    red: "0xfc5d7c"
+    green: "0x9ed072"
+    yellow: "0xe7c664"
+    blue: "0x76cce0"
+    magenta: "0xb39df3"
+    cyan: "0xf39660"
+    white: "0xe2e2e3"
 
   bright:
-    black: "0x7e8294"
-    red: "0xfb617e"
-    green: "0x9ed06c"
-    yellow: "0xedc763"
-    blue: "0x6dcae8"
-    magenta: "0xbb97ee"
-    cyan: "0xf89860"
-    white: "0xe1e3e4"
+    black: "0x7f8490"
+    red: "0xfc5d7c"
+    green: "0x9ed072"
+    yellow: "0xe7c664"
+    blue: "0x76cce0"
+    magenta: "0xb39df3"
+    cyan: "0xf39660"
+    white: "0xe2e2e3"

@@ -155,7 +155,8 @@ awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
 
   -- Each screen has its own tag table.
-  awful.tag({ "dev", "web", "chat", "mail", "files" }, s, awful.layout.layouts[1])
+  awful.tag({ "dev", "web", "files", "chat", "mail", "ttv" }, s, awful.layout.layouts[1])
+
 
   local new_shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, 4)
@@ -329,7 +330,7 @@ awful.rules.rules = {
     role = {
       "AlarmWindow", -- Thunderbird's calendar.
       "ConfigManager", -- Thunderbird's about:config.
-      "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+      -- "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
     }
   }, properties = { floating = true } },
 
@@ -350,6 +351,10 @@ awful.rules.rules = {
   {
     rule = { class = "Google-chrome" },
     properties = { tag = "web", switchtotag = true }
+  },
+  {
+    rule = { class = "Chromium" },
+    properties = { tag = "ttv" }
   },
   {
     rule = { class = "firefox" },
@@ -373,15 +378,15 @@ awful.rules.rules = {
   },
   {
     rule = { class = "mpv" },
-    properties = { tag = "files", switchtotag = false }
+    properties = { tag = "ttv" }
   },
   {
     rule = { class = "streamlink-twitch-gui" },
-    properties = { tag = "files", screen = 1 }
+    properties = { tag = "ttv", screen = 1 }
   },
   {
     rule = { class = "chatterino" },
-    properties = { tag = "files", screen = 1 }
+    properties = { tag = "ttv", screen = 1 }
   },
   -- }}}
 }
@@ -462,7 +467,7 @@ end
 run_once("xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
 -- run_once("sleep 1s && nitrogen --restore")
 run_once("picom &") -- picom -b cause display freeze
-run_once("imwheel -b '45'")
+-- run_once("imwheel -b '45'")
 run_once("xset r rate 180 38")
 run_once("evolution")
 

@@ -1,7 +1,6 @@
-lvim.colorscheme = "gruvbox-material"
-vim.g.gruvbox_material_foreground = "original"
--- vim.g.sonokai_style = "andromeda"
 -- vim.g.sonokai_better_performance = 1
+lvim.colorscheme = "sonokai"
+-- vim.g.gruvbox_material_foreground = "original"
 lvim.format_on_save = true
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"

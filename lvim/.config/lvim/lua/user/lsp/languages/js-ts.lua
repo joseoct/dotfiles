@@ -19,11 +19,11 @@ require("typescript").setup {
 -- Set a formatter.
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  -- { command = "prettier", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
-  {
-    command = "eslint_d",
-    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-  }
+  { command = "prettier", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
+  -- {
+  --   command = "eslint_d",
+  --   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  -- }
 }
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")

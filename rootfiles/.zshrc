@@ -18,6 +18,7 @@ alias pacr="sudo pacman -R"
 alias pacu="sudo pacman -Syu"
 alias ra="ranger"
 alias v="lvim"
+alias ls="exa -l"
 alias s="sensors"
 
 export PATH=$HOME/.local/bin:$PATH
