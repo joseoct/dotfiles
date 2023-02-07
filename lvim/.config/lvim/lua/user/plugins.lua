@@ -1,6 +1,14 @@
 lvim.plugins = {
+  -- {{{ themes
+  {
+    "m-demare/hlargs.nvim",
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('hlargs').setup()
+    end
+  },
+  { "mrjones2014/nvim-ts-rainbow" },
   { "EdenEast/nightfox.nvim" },
-  { "rose-pine/neovim" },
   { "sainnhe/gruvbox-material" },
   { "Mofiqul/dracula.nvim" },
   { "sainnhe/sonokai" },

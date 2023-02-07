@@ -11,11 +11,12 @@ vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextHint', { link = "Blue" })
 -- vim.api.nvim_set_hl(0, '@punctuation.bracket', { fg = "#a89984" }) -- gruvbox
 vim.api.nvim_set_hl(0, '@tag.attribute', { italic = true })
 -- vim.api.nvim_set_hl(0, '@keyword.return', { link = "Keyword" })
--- vim.api.nvim_set_hl(0, '@tag.delimiter', { fg = "#a9a9a9" })
+vim.api.nvim_set_hl(0, '@tag.delimiter', { fg = "#a9a9a9" })
 vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', { fg = "#b39df3" })
 vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { underline = true })
 vim.api.nvim_set_hl(0, 'IlluminatedWordText', { underline = true })
 vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { underline = true })
+vim.api.nvim_set_hl(0, 'Hlargs', { fg = "orange", italic = true })
 
 -- vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 --   callback = function()

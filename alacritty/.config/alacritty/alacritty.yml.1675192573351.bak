@@ -1,0 +1,61 @@
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: SemiBold
+  italic:
+    family: Recursive
+  size: 11
+  #draw_bold_text_with_bright_colors: true
+  #
+  #colors:
+  #  primary:
+  #    background: "0x2c2e34"
+  #    foreground: "0xe2e2e3"
+  #
+  #  normal:
+  #    black: "0x181819"
+  #    red: "0xfc5d7c"
+  #    green: "0x9ed072"
+  #    yellow: "0xe7c664"
+  #    blue: "0x76cce0"
+  #    magenta: "0xb39df3"
+  #    cyan: "0xf39660"
+  #    white: "0xe2e2e3"
+  #
+  #  bright:
+  #    black: "0x7f8490"
+  #    red: "0xfc5d7c"
+  #    green: "0x9ed072"
+  #    yellow: "0xe7c664"
+  #    blue: "0x76cce0"
+  #    magenta: "0xb39df3"
+  #    cyan: "0xf39660"
+  #    white: "0xe2e2e3"
+colors:
+  name: 3024 (dark)
+  author: Chris Kempson
+  primary:
+    background: "#090300"
+    foreground: "#a5a2a2"
+  cursor:
+    text: "#090300"
+    cursor: "#a5a2a2"
+  normal:
+    black: "#090300"
+    red: "#db2d20"
+    green: "#01a252"
+    yellow: "#fded02"
+    blue: "#01a0e4"
+    magenta: "#a16a94"
+    cyan: "#b5e4f4"
+    white: "#a5a2a2"
+  bright:
+    black: "#5c5855"
+    red: "#db2d20"
+    green: "#01a252"
+    yellow: "#fded02"
+    blue: "#01a0e4"
+    magenta: "#a16a94"
+    cyan: "#b5e4f4"
+    white: "#f7f7f7"
+theme: 3024.dark
