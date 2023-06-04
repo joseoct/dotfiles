@@ -1,5 +1,14 @@
 lvim.plugins = {
   -- {{{ themes
+  { "hrsh7th/vim-unmatchparen" },
+  { "lunarvim/darkplus.nvim" },
+  { "mrjones2014/nvim-ts-rainbow" },
+  { "EdenEast/nightfox.nvim" },
+  { "sainnhe/gruvbox-material" },
+  { "Mofiqul/dracula.nvim" },
+  { "sainnhe/sonokai" },
+  { "catppuccin/nvim",            as = "catppuccin" },
+  -- }}}
   {
     "m-demare/hlargs.nvim",
     requires = { 'nvim-treesitter/nvim-treesitter' },
@@ -7,18 +16,11 @@ lvim.plugins = {
       require('hlargs').setup()
     end
   },
-  { "mrjones2014/nvim-ts-rainbow" },
-  { "EdenEast/nightfox.nvim" },
-  { "sainnhe/gruvbox-material" },
-  { "Mofiqul/dracula.nvim" },
-  { "sainnhe/sonokai" },
-  { "catppuccin/nvim", as = "catppuccin" },
-  -- }}}
   { "svban/YankAssassin.vim" },
   { "pantharshit00/vim-prisma" },
   { "mxsdev/nvim-dap-vscode-js" },
   { "nvim-treesitter/playground" },
-  { "github/copilot.vim" },
+  -- { "github/copilot.vim" },
   { "tpope/vim-surround" },
   { "ThePrimeagen/harpoon" },
   {
@@ -48,10 +50,11 @@ lvim.plugins = {
     "romgrk/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
         throttle = true, -- Throttles plugin updates (may improve performance)
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = {
+          -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
           -- For all filetypes
           -- Note that setting an entry here replaces all other patterns for this entry.
           -- By setting the 'default' entry below, you can control which nodes you want to
@@ -85,7 +88,6 @@ lvim.plugins = {
     "ggandor/leap.nvim",
     config = function()
       require('leap').add_default_mappings()
-      vim.keymap.del({ 'x', 'o' }, 'x')
     end
   },
   {
@@ -103,13 +105,13 @@ lvim.plugins = {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript", "typescript", "lua" }, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
+        RGB = true,      -- #RGB hex codes
+        RRGGBB = true,   -- #RRGGBB hex codes
         RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        rgb_fn = true,   -- CSS rgb() and rgba() functions
+        hsl_fn = true,   -- CSS hsl() and hsla() functions
+        css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
       })
     end,
   },

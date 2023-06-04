@@ -20,8 +20,20 @@ lvim.builtin.which_key.mappings.l.S = { '<cmd>SymbolsOutline<cr>', "SymbolsOutli
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 
-lvim.builtin.which_key.mappings["t"] = {
-  "<cmd>TodoTrouble<cr>", "Todo-comments"
+lvim.builtin.which_key.mappings["T"] = {
+  "<cmd>TSToggle rainbow<cr><cmd>TSToggle rainbow<cr>", "Todo-comments"
+}
+
+lvim.builtin.which_key.mappings["1"] = {
+  "<cmd>:lua require('harpoon.ui').nav_file(1) <cr>", "Harpoon mark 1"
+}
+
+lvim.builtin.which_key.mappings["2"] = {
+  "<cmd>:lua require('harpoon.ui').nav_file(2) <cr>", "Harpoon mark 2"
+}
+
+lvim.builtin.which_key.mappings["3"] = {
+  "<cmd>:lua require('harpoon.ui').nav_file(3) <cr>", "Harpoon mark 3"
 }
 
 lvim.builtin.which_key.mappings["w"] = {
@@ -34,8 +46,12 @@ lvim.builtin.which_key.mappings["v"] = {
   "$va{V", "Select All Function"
 }
 
-lvim.builtin.which_key.mappings["<leader>"] = {
-  ":w<cr>", "Save"
+-- lvim.builtin.which_key.mappings["<leader>"] = {
+--   ":w", "Save"
+-- }
+
+lvim.builtin.which_key.mappings["n"] = {
+  "*``cgN", "*``cgN"
 }
 
 lvim.builtin.which_key.mappings["S"] = {

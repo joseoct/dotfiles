@@ -14,3 +14,5 @@ lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
     fallback()
   end
 end
+
+vim.g.copilot.enable_line_comment = false

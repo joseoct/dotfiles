@@ -1,18 +1,24 @@
-lvim.colorscheme = "gruvbox-material"
-vim.g.gruvbox_material_foreground = "original"
+lvim.colorscheme = "tokyonight-moon"
+-- vim.g.gruvbox_material_foreground = "original"
 lvim.format_on_save = true
+-- lvim.builtin.bufferline.active = false
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = "dashboard"
 lvim.builtin.illuminate.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
 lvim.builtin.illuminate.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.cmp.confirm_opts.select = true
+lvim.lsp.installer.setup.automatic_installation = false
 lvim.builtin.which_key.setup.plugins.presets = {
   g = true,
   z = true
+}
+lvim.builtin.nvimtree.setup.filters.custom = {
+  "node_modules", ".git"
 }
 lvim.builtin.nvimtree.setup.view.adaptive_size = true
 local banner = require "user.banners"
@@ -22,8 +28,11 @@ lvim.builtin.alpha.dashboard.section.header = {
 -- lvim.transparent_window = true
 
 --{{{ Vim options
+vim.g.shell = "/bin/sh"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.opt.matchpairs = "(:),{:},[:],<:>"
+vim.opt.showmatch = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
