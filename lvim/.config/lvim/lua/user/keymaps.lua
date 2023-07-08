@@ -6,6 +6,7 @@ lvim.keys.insert_mode["<C-h>"] = "<ESC><cmd>lua require'luasnip'.jump(-1)<CR>"
 lvim.keys.insert_mode["<C-l>"] = "<ESC><cmd>lua require'luasnip'.jump(1)<CR>"
 
 -- Normal mode
+lvim.keys.normal_mode["gd"] = "<Cmd>lua vim.lsp.buf.definition()<CR>"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"

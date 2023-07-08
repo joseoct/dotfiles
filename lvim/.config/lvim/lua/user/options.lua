@@ -1,4 +1,4 @@
-lvim.colorscheme = "tokyonight-moon"
+lvim.colorscheme = "dracula"
 -- vim.g.gruvbox_material_foreground = "original"
 lvim.format_on_save = true
 -- lvim.builtin.bufferline.active = false
@@ -21,12 +21,6 @@ lvim.builtin.nvimtree.setup.filters.custom = {
   "node_modules", ".git"
 }
 lvim.builtin.nvimtree.setup.view.adaptive_size = true
-local banner = require "user.banners"
-lvim.builtin.alpha.dashboard.section.header = {
-  val = banner.dashboard(),
-}
--- lvim.transparent_window = true
-
 --{{{ Vim options
 vim.g.shell = "/bin/sh"
 vim.g.loaded_netrw = 1

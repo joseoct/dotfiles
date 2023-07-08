@@ -15,8 +15,9 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.rainbow = {
-  enable = false,
-  extended_mode = false, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  max_file_lines = nil,  -- Do not enable for files with more than 1000 lines, int
-}
+-- lvim.builtin.treesitter.rainbow = {
+--   enable = true,
+--   query = 'rainbow-parens',
+--   disable = { 'html' },
+--   strategy = require('ts-rainbow').strategy.global,
+-- }

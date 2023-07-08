@@ -1,17 +1,31 @@
 lvim.plugins = {
   -- {{{ themes
+  {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+  },
+  {
+    "petertriho/nvim-scrollbar",
+    config = function()
+      require('scrollbar').setup()
+    end
+  },
   { "hrsh7th/vim-unmatchparen" },
   { "lunarvim/darkplus.nvim" },
-  { "mrjones2014/nvim-ts-rainbow" },
+  { "HiPhish/rainbow-delimiters.nvim" },
   { "EdenEast/nightfox.nvim" },
   { "sainnhe/gruvbox-material" },
   { "Mofiqul/dracula.nvim" },
   { "sainnhe/sonokai" },
-  { "catppuccin/nvim",            as = "catppuccin" },
+  { "catppuccin/nvim",                name = "catppuccin" },
   -- }}}
   {
     "m-demare/hlargs.nvim",
-    requires = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('hlargs').setup()
     end
@@ -20,7 +34,7 @@ lvim.plugins = {
   { "pantharshit00/vim-prisma" },
   { "mxsdev/nvim-dap-vscode-js" },
   { "nvim-treesitter/playground" },
-  -- { "github/copilot.vim" },
+  { "github/copilot.vim" },
   { "tpope/vim-surround" },
   { "ThePrimeagen/harpoon" },
   {
@@ -93,7 +107,7 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
+    lazy = true,
     config = function()
       require("persistence").setup {
         dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),

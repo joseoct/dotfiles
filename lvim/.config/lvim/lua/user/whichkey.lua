@@ -50,10 +50,6 @@ lvim.builtin.which_key.mappings["v"] = {
 --   ":w", "Save"
 -- }
 
-lvim.builtin.which_key.mappings["n"] = {
-  "*``cgN", "*``cgN"
-}
-
 lvim.builtin.which_key.mappings["S"] = {
   name = "Session",
   c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
