@@ -7,7 +7,18 @@ local awesome = _G.awesome
 
 local menubar = require("menubar")
 local modkey = "Mod1"
+local altgr = "Mod5"
 local bindings = {}
+
+local function changeToTag(index)
+  return function()
+    local screen = awful.screen.focused()
+    local tag = screen.tags[index]
+    if tag then
+      tag:view_only()
+    end
+  end
+end
 
 bindings.globalkeys = gears.table.join(
 
@@ -27,24 +38,106 @@ bindings.globalkeys = gears.table.join(
   -- Google chrome
   -- awful.key({ modkey }, "c", function() awful.util.spawn("google-chrome-stable") end,
   --   { description = "run google chrome", group = "applications" }),
+
+  awful.key({ altgr }, "a", changeToTag(1), { description = "change to back tag", group = "awesome" }),
+  awful.key({ altgr }, "s", changeToTag(2), { description = "change to front tag", group = "awesome" }),
+  awful.key({ altgr }, "d", changeToTag(3), { description = "change to mobile tag", group = "awesome" }),
+  awful.key({ altgr }, "f", changeToTag(4), { description = "change to web tag", group = "awesome" }),
+  awful.key({ altgr }, "g", changeToTag(5), { description = "change to database tag", group = "awesome" }),
+  awful.key({ altgr }, "h", changeToTag(6), { description = "change to git tag", group = "awesome" }),
+  awful.key({ altgr }, "j", changeToTag(7), { description = "change to files tag", group = "awesome" }),
+  awful.key({ altgr }, "k", changeToTag(8), { description = "change to any tag", group = "awesome" }),
+  awful.key({ altgr }, "l", changeToTag(9), { description = "change to mail tag", group = "awesome" }),
+  awful.key({ altgr }, "ç", changeToTag(10), { description = "change to ttv tag", group = "awesome" }),
+
+  -- Change to tag front
+  awful.key({ altgr }, "a",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[1]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to front tag", group = "awesome" }),
+
+  -- Change to tag back
+  awful.key({ altgr }, "s",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[2]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to back tag", group = "awesome" }),
+
+  -- Change to tag back
+  awful.key({ altgr }, "d",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[3]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to web tag", group = "awesome" }),
+
+  -- Change to tag mobile
+  awful.key({ altgr }, "f",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[4]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to mobile tag", group = "awesome" }),
+
+  -- Change to tag dbeaver
+  awful.key({ altgr }, "g",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[5]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to dbeaver tag", group = "awesome" }),
+
+  -- Change to tag git
+  awful.key({ altgr }, "h",
+    function()
+      local screen = awful.screen.focused()
+      local tag = screen.tags[6]
+      if tag then
+        tag:view_only()
+      end
+    end,
+    { description = "change to git tag", group = "awesome" }),
+
   -- Firefox
   awful.key({ modkey }, "c",
     function() awful.spawn("brave --wm-window-animations-disabled --animation-duration-scale=0") end,
     { description = "run google chrome", group = "applications" }),
+
   -- Thunar
   awful.key({ modkey }, "F2", function() awful.spawn("thunar") end,
     { description = "run thunar", group = "launcher" }),
+
   -- Ranger with terminal
   awful.key({ modkey }, "e", function() awful.spawn(terminal .. " -e ranger") end,
     { description = "run ranger", group = "launcher" }),
+
   -- LunarVim
   awful.key({ modkey }, "v", function() awful.spawn("code") end,
     { description = "run vscode", group = "launcher" }),
+
   -- Flameshot
   awful.key({ "Mod4", "Shift" }, "s", function() awful.spawn("flameshot gui") end,
     { description = "run flameshot", group = "applications" }),
-  -- }}}
 
+  -- }}}
   awful.key({ "Mod4", }, "h", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }),
   awful.key({ modkey, "Control" }, "h", awful.tag.viewprev,
@@ -165,8 +258,8 @@ bindings.clientkeys = gears.table.join(
     { description = "toggle fullscreen", group = "client" }),
   awful.key({ modkey, }, "q", function(c) c:kill() end,
     { description = "close", group = "client" }),
-  awful.key({ modkey, }, "w", awful.client.floating.toggle,
-    { description = "toggle floating", group = "client" }),
+  -- awful.key({ modkey, }, "w", awful.client.floating.toggle,
+  --   { description = "toggle floating", group = "client" }),
   awful.key({ modkey, }, "m", function(c) c:swap(awful.client.getmaster()) end,
     { description = "move to master", group = "client" }),
   awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,

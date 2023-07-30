@@ -4,7 +4,7 @@ set fish_greeting
 alias pac="sudo pacman -S"
 alias pacr="sudo pacman -R"
 alias pacu="sudo pacman -Syy"
-alias nvim="lvim"
+alias :q="exit"
 
 # SELLENTT alias
 alias pd="cd ~/sellentt/biaction-functions/functions/PedidosDigitais/ && lvim ."

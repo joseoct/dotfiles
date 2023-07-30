@@ -13,19 +13,19 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +8 lvim/.config/lvim/config.lua
-badd +16 lvim/.config/lvim/lua/user/autocommands.lua
+badd +14 lvim/.config/lvim/config.lua
+badd +1 lvim/.config/lvim/ftplugin/html.lua
 argglobal
 %argdel
-edit lvim/.config/lvim/lua/user/autocommands.lua
+edit lvim/.config/lvim/ftplugin/html.lua
 argglobal
 balt lvim/.config/lvim/config.lua
-let s:l = 16 - ((15 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 16
-normal! 055|
+keepjumps 1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -13,36 +13,19 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +83 lib/authentication/login.dart
-badd +135 lib/sideMenu.dart
-badd +13 lib/main.dart
-badd +1 ~/sellentt/sellentt-flutter/android/build.gradle
-badd +25 ~/sellentt/sellentt-flutter/android/app/build.gradle
-badd +42 ~/sellentt/sellentt-flutter/lib/authentication/recovery_password.dart
+badd +455 lib/src/screens/home_screen.dart
+badd +36 lib/src/models/company_sales_history.dart
 argglobal
 %argdel
-$argadd .
-edit ~/sellentt/sellentt-flutter/android/app/build.gradle
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
+edit lib/src/models/company_sales_history.dart
 argglobal
-balt lib/sideMenu.dart
-let s:l = 63 - ((17 * winheight(0) + 19) / 39)
+balt lib/src/screens/home_screen.dart
+let s:l = 36 - ((20 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 63
-normal! 036|
+keepjumps 36
+normal! 059|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -50,8 +33,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

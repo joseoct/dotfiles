@@ -20,7 +20,7 @@ require("typescript").setup {
 -- Set a formatter.
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "prettierd", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
+  -- { command = "prettierd", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
   -- {
   --   command = "eslint_d",
   --   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },

@@ -159,7 +159,9 @@ awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
 
   -- Each screen has its own tag table.
-  awful.tag({ "front", "back", "web", "dbeaver", "git", "files", "chat", "mail", "ttv" }, s, awful.layout.layouts[1])
+  awful.tag(
+    { "back", "front", "mobile", "web", "dbeaver", "git", "files", "any", "mail", "ttv" }, s,
+    awful.layout.layouts[1])
 
   s.mytaglist = awful.widget.taglist {
     screen  = s,
@@ -282,7 +284,6 @@ awful.rules.rules = {
     },
     properties = { floating = true }
   },
-
   -- Add titlebars to normal clients and dialogs
   {
     rule_any = { type = { "normal", "dialog" }
@@ -291,13 +292,21 @@ awful.rules.rules = {
   },
 
   -- {{{ My rules
+  -- {
+  --   rule = { class = "Alacritty" },
+  --   properties = { tag = "dev", switchtotag = true }
+  -- },
+  -- {
+  --   rule = { class = "Code" },
+  --   properties = { tag = "dev", switchtotag = true }
+  -- },
   {
-    rule = { class = "Alacritty" },
-    properties = { tag = "dev", switchtotag = true }
+    rule = { class = "DBeaver" },
+    properties = { tag = "dbeaver", switchtotag = true }
   },
   {
-    rule = { class = "Code" },
-    properties = { tag = "dev", switchtotag = true }
+    rule = { class = "Gittyup" },
+    properties = { tag = "git", switchtotag = true }
   },
   {
     rule = { class = "Google-chrome" },
@@ -317,7 +326,11 @@ awful.rules.rules = {
   },
   {
     rule = { class = "discord" },
-    properties = { tag = "chat", switchtotag = true }
+    properties = { tag = "any", switchtotag = true }
+  },
+  {
+    rule = { class = "Stremio" },
+    properties = { tag = "any", switchtotag = true }
   },
   {
     rule = { class = "Mailspring" },
@@ -361,6 +374,17 @@ client.connect_signal("manage", function(c)
     awful.placement.no_offscreen(c)
   end
 end)
+
+-- Keeps floating windows on top
+-- client.connect_signal("property::floating", function(c)
+--   if not c.fullscreen then
+--     if c.floating then
+--       c.ontop = true
+--     else
+--       c.ontop = false
+--     end
+--   end
+-- end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)

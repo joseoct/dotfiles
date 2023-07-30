@@ -13,18 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +5 pd/api.js
+badd +38 process_queue/expiredShoppingCycle.js
 argglobal
 %argdel
-$argadd .
-edit pd/api.js
+edit process_queue/expiredShoppingCycle.js
 argglobal
-let s:l = 5 - ((4 * winheight(0) + 24) / 49)
+let s:l = 46 - ((30 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
-normal! 0
+keepjumps 46
+normal! 029|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

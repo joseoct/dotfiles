@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/sellentt/biaction-functions/functions/PedidosDigitais
+cd ~/sellentt/biaction-super-admin
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,18 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +8 knexfile.js
+badd +0 src/app/components/company-details/config-addons/config-addons.component.html
 argglobal
 %argdel
-$argadd biaction-functions/
-edit knexfile.js
+edit src/app/components/company-details/config-addons/config-addons.component.html
 argglobal
-let s:l = 12 - ((11 * winheight(0) + 20) / 40)
+let s:l = 19 - ((18 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 09|
+keepjumps 19
+normal! 037|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

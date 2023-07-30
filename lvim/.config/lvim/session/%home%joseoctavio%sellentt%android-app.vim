@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/sellentt/biaction-functions/functions/PedidosDigitais
+cd ~/sellentt/android-app
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,18 +13,19 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +8 knexfile.js
+badd +1081 app/src/main/java/br/com/tefra/biaction/MainAdminActivity.java
+badd +259 app/src/main/java/br/com/tefra/biaction/util/Constants.java
 argglobal
 %argdel
-$argadd biaction-functions/
-edit knexfile.js
+edit app/src/main/java/br/com/tefra/biaction/MainAdminActivity.java
 argglobal
-let s:l = 12 - ((11 * winheight(0) + 20) / 40)
+balt app/src/main/java/br/com/tefra/biaction/util/Constants.java
+let s:l = 1081 - ((18 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 09|
+keepjumps 1081
+normal! 049|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

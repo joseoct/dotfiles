@@ -13,18 +13,20 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 src/app/components/favorite-filters/favorite-filters.component.html
-badd +58 ~/sellentt/biaction-web/src/app/components/favorite-filters/favorite-filters.component.ts
+badd +56 src/app/services/favorite-filters/favorite-filters.service.ts
+badd +158 src/app/services/configs/configs.service.ts
+badd +14 ~/sellentt/biaction-web/src/app/services/configs-app/configs-app.service.ts
 argglobal
 %argdel
-edit ~/sellentt/biaction-web/src/app/components/favorite-filters/favorite-filters.component.ts
+$argadd .
+edit ~/sellentt/biaction-web/src/app/services/configs-app/configs-app.service.ts
 argglobal
-balt src/app/components/favorite-filters/favorite-filters.component.html
-let s:l = 9 - ((8 * winheight(0) + 24) / 48)
+balt src/app/services/configs/configs.service.ts
+let s:l = 14 - ((13 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
+keepjumps 14
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

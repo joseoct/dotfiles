@@ -1,6 +1,6 @@
 lvim.colorscheme = "dracula"
 -- vim.g.gruvbox_material_foreground = "original"
-lvim.format_on_save = true
+lvim.format_on_save = false
 -- lvim.builtin.bufferline.active = false
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"

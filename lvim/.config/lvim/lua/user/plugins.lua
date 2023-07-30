@@ -1,5 +1,4 @@
 lvim.plugins = {
-  -- {{{ themes
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
@@ -14,14 +13,17 @@ lvim.plugins = {
       require('scrollbar').setup()
     end
   },
-  { "hrsh7th/vim-unmatchparen" },
+  -- { "hrsh7th/vim-unmatchparen" },
+  -- {{{ themes
+  { "projekt0n/github-nvim-theme" },
   { "lunarvim/darkplus.nvim" },
-  { "HiPhish/rainbow-delimiters.nvim" },
+  { "mrjones2014/nvim-ts-rainbow" },
+  -- { "HiPhish/rainbow-delimiters.nvim" },
   { "EdenEast/nightfox.nvim" },
   { "sainnhe/gruvbox-material" },
   { "Mofiqul/dracula.nvim" },
   { "sainnhe/sonokai" },
-  { "catppuccin/nvim",                name = "catppuccin" },
+  { "catppuccin/nvim",            name = "catppuccin" },
   -- }}}
   {
     "m-demare/hlargs.nvim",
@@ -64,7 +66,7 @@ lvim.plugins = {
     "romgrk/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup {
-        enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
+        enable = false,  -- Enable this plugin (Can be enabled/disabled later via commands)
         throttle = true, -- Throttles plugin updates (may improve performance)
         max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
         patterns = {
