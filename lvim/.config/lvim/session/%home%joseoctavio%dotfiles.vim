@@ -13,18 +13,18 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +14 lvim/.config/lvim/config.lua
-badd +1 lvim/.config/lvim/ftplugin/html.lua
+badd +1 ~/dotfiles/lvim/.config/lvim/lua/user/rainbow-delimiters.lua
+badd +16 ~/dotfiles/lvim/.config/lvim/lua/user/options.lua
 argglobal
 %argdel
-edit lvim/.config/lvim/ftplugin/html.lua
+$argadd lvim
+edit ~/dotfiles/lvim/.config/lvim/lua/user/options.lua
 argglobal
-balt lvim/.config/lvim/config.lua
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 16 - ((15 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 16
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

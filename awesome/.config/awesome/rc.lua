@@ -160,7 +160,7 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Each screen has its own tag table.
   awful.tag(
-    { "back", "front", "mobile", "web", "dbeaver", "git", "files", "any", "mail", "ttv" }, s,
+    { "mobile", "back", "front", "web", "dbeaver", "git", "files", "any", "mail", "ttv" }, s,
     awful.layout.layouts[1])
 
   s.mytaglist = awful.widget.taglist {
@@ -391,7 +391,7 @@ client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
-client.connect_signal("focus", function(c) c.border_color = "#fc0366" end)
+client.connect_signal("focus", function(c) c.border_color = "#4287f5" end)
 client.connect_signal("unfocus", function(c) c.border_color = "#1e1e2e" end)
 -- }}}
 
