@@ -147,7 +147,7 @@ local function set_wallpaper(s)
     if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
     end
-    gears.wallpaper.maximized("/home/joseoctavio/Pictures/wp1.png", s, true)
+    gears.wallpaper.maximized("/home/joseoctavio/Pictures/imagem.jpg", s, true)
   end
 end
 
@@ -391,8 +391,9 @@ client.connect_signal("mouse::enter", function(c)
   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
-client.connect_signal("focus", function(c) c.border_color = "#4287f5" end)
+client.connect_signal("focus", function(c) c.border_color = "#9933FF" end)
 client.connect_signal("unfocus", function(c) c.border_color = "#1e1e2e" end)
+
 -- }}}
 
 beautiful.notification_icon_size = 120
@@ -424,5 +425,5 @@ awful.spawn.with_shell(
   "xrandr --output DP-0 --rate 144.00 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1 --off --output eDP-1-1 --rate 60.02 --mode 1280x720 --pos 0x360 --rotate normal --output DP-1-1 --off --output HDMi-1-1 --off --output HDMI-1-2 --off")
 awful.spawn.with_shell("picom") -- picom -b cause display freeze
 awful.spawn.with_shell("xset r rate 180 38")
-awful.spawn.with_shell("variety -n")
+-- awful.spawn.with_shell("variety -n")
 -- run_once("mailspring")

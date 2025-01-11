@@ -116,9 +116,14 @@ bindings.globalkeys = gears.table.join(
     end,
     { description = "change to git tag", group = "awesome" }),
 
+  -- Lock screen with i3lock
+  awful.key({ 'Mod4' }, "l",
+    function() awful.spawn("i3lock --nofork --color=000000") end,
+    { description = "run google chrome", group = "applications" }),
+
   -- Firefox
   awful.key({ modkey }, "c",
-    function() awful.spawn("brave --wm-window-animations-disabled --animation-duration-scale=0") end,
+    function() awful.spawn("brave-browser --wm-window-animations-disabled --animation-duration-scale=0") end,
     { description = "run google chrome", group = "applications" }),
 
   -- Thunar
@@ -130,7 +135,7 @@ bindings.globalkeys = gears.table.join(
     { description = "run ranger", group = "launcher" }),
 
   -- LunarVim
-  awful.key({ modkey }, "v", function() awful.spawn("code") end,
+  awful.key({ modkey }, "v", function() awful.spawn("codium") end,
     { description = "run vscode", group = "launcher" }),
 
   -- Flameshot
@@ -242,11 +247,11 @@ bindings.globalkeys = gears.table.join(
   -- awful.key({ modkey }, "p",
   --   function() awful.util.spawn("rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi") end,
   --   { description = "show the menubar", group = "launcher" })
-  -- awful.key({ modkey }, "p", function() menubar.show() end,
-  --   { description = "show the menubar", group = "launcher" })
-  awful.key({ modkey }, "p",
-    function() awful.spawn.with_shell("rofi -show drun -theme Arc-Dark") end,
-    { description = "rofi drun", group = "launcher" })
+  awful.key({ modkey }, "p", function() menubar.show() end,
+    { description = "show the menubar", group = "launcher" })
+  -- awful.key({ modkey }, "p",
+  --   function() awful.spawn.with_shell("rofi -show drun -theme Arc-Dark") end,
+  --   { description = "rofi drun", group = "launcher" })
 )
 
 bindings.clientkeys = gears.table.join(
@@ -258,8 +263,8 @@ bindings.clientkeys = gears.table.join(
     { description = "toggle fullscreen", group = "client" }),
   awful.key({ modkey, }, "q", function(c) c:kill() end,
     { description = "close", group = "client" }),
-  -- awful.key({ modkey, }, "w", awful.client.floating.toggle,
-  --   { description = "toggle floating", group = "client" }),
+  awful.key({ modkey, }, "w", awful.client.floating.toggle,
+    { description = "toggle floating", group = "client" }),
   awful.key({ modkey, }, "m", function(c) c:swap(awful.client.getmaster()) end,
     { description = "move to master", group = "client" }),
   awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,

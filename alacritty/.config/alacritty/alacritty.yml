@@ -1,9 +1,9 @@
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: FantasqueSansM Nerd Font Mono
     style: Regular
   italic:
-    family: Recursive
+    family: FantasqueSansM Nerd Font Mono
   size: 12
 
 colors:
